@@ -1,41 +1,86 @@
 from tkinter import *
+import tkinter as tk
 
 
 class ToolBar(Frame):
     def __init__(self, parent):
         super().__init__(parent)
 
-        menuBar = Menu(parent)
-        parent.config(menu=menuBar)
+        menu_frame= tk.Frame(parent,background= "gray")
+        menu_frame.pack(side="top" , fill="x")
+        
+        productos = tk.Menubutton(menu_frame,
+                                  text="Productos",
+                                  background= "gray",
+                                  foreground="white",
+                                  activeforeground="black",
+                                  activebackground="gray52")
+        
+        menu_productos = tk.Menu(productos,tearoff=0)
+        menu_productos.add_command(label="Ingresar Producto")
+        menu_productos.add_command(label="Editar Producto")
+        menu_productos.add_command(label="Ver Productos")
+        
+        editorial = tk.Menubutton(menu_frame,
+                                  text="Editorial",
+                                  background= "gray",
+                                  foreground="white",
+                                  activeforeground="black",
+                                  activebackground="gray52")
+        
+        menu_editoriales = tk.Menu(editorial,tearoff=0)
+        menu_editoriales.add_command(label="Ingresar Editorial")
+        menu_editoriales.add_command(label="Editar Editorial")
+        menu_editoriales.add_command(label="Ver Editoriales")
+        
+        proveedores = tk.Menubutton(menu_frame,
+                                  text="Proveedores",
+                                  background= "gray",
+                                  foreground="white",
+                                  activeforeground="black",
+                                  activebackground="gray52")
+        
+        menu_proveedores = tk.Menu(proveedores,tearoff=0)
+        menu_proveedores.add_command(label="Ingresar Proveedor")
+        menu_proveedores.add_command(label="Editar Proveedor")
+        menu_proveedores.add_command(label="Ver Proveedores")
 
-        productosMenu=Menu(menuBar,tearoff=0)
-        productosMenu.add_command(label="Ingresar producto")
-        productosMenu.add_command(label="Editar producto")
-        productosMenu.add_command(label="Ver productos")
+        ventas = tk.Menubutton(menu_frame,
+                                  text="Ventas",
+                                  background= "gray",
+                                  foreground="white",
+                                  activeforeground="black",
+                                  activebackground="gray52")
         
-        editorialMenu=Menu(menuBar,tearoff=0)
-        editorialMenu.add_command(label="Ingresar Editorial")
-        editorialMenu.add_command(label="Editar Editorial")
-        editorialMenu.add_command(label="Ver Editoriales")
-        
-        proveedorMenu=Menu(menuBar,tearoff=0)
-        proveedorMenu.add_command(label="Ingresar Proveedor")
-        proveedorMenu.add_command(label="Editar Proveedor")
-        proveedorMenu.add_command(label="Ver Proveedores")
-        
-        ventaMenu=Menu(menuBar,tearoff=0)
-        ventaMenu.add_command(label="Ingresar Venta")
-        ventaMenu.add_command(label="Ver Ventas")
-     
-        compraMenu=Menu(menuBar,tearoff=0)
-        compraMenu.add_command(label="Ingresar Compra")
-        compraMenu.add_command(label="Editar Compra")
-        compraMenu.add_command(label="Ver Compras")
-       
+        menu_ventas = tk.Menu(ventas,tearoff=0)
+        menu_ventas.add_command(label="Ingresar Venta")
+        menu_ventas.add_command(label="Ver Ventas")
 
-        menuBar.add_cascade(label="Productos",menu=productosMenu)
-        menuBar.add_cascade(label="Editorial",menu=editorialMenu)
-        menuBar.add_cascade(label="Proveedores",menu=proveedorMenu)
-        menuBar.add_cascade(label="Ventas",menu=ventaMenu)
-        menuBar.add_cascade(label="Compras",menu=compraMenu)
+        
+        compras = tk.Menubutton(menu_frame,
+                                  text="Compras",
+                                  background= "gray",
+                                  foreground="white",
+                                  activeforeground="black",
+                                  activebackground="gray52")
+        
+        menu_compras = tk.Menu(compras,tearoff=0)
+        menu_compras.add_command(label="Ingresar Compra")
+        menu_compras.add_command(label="Editar Compra")
+        menu_compras.add_command(label="Ver Compras")
+        
+        productos.config(menu=menu_productos)
+        productos.pack(side="left")
+
+        editorial.config(menu=menu_editoriales)
+        editorial.pack(side="left")
+
+        proveedores.config(menu=menu_proveedores)
+        proveedores.pack(side="left")
+
+        ventas.config(menu=menu_ventas)
+        ventas.pack(side="left")
+
+        compras.config(menu=menu_compras)
+        compras.pack(side="left")
       
