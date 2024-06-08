@@ -8,14 +8,14 @@ class ToolBar(Frame):
 
         menu_frame= tk.Frame(parent,background= "gray")
         menu_frame.pack(side="top" , fill="x")
-        
+        #crea el btn productos
         productos = tk.Menubutton(menu_frame,
                                   text="Productos",
                                   background= "gray",
                                   foreground="white",
                                   activeforeground="black",
                                   activebackground="gray52")
-        
+        #crea el menu desplegable de 
         menu_productos = tk.Menu(productos,tearoff=0)
         menu_productos.add_command(label="Ingresar Producto")
         menu_productos.add_command(label="Editar Producto")
