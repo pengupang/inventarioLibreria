@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter as tk
+from frameVerProductos import FrameVerProductos
 
 
 class ToolBar(Frame):
@@ -15,11 +16,18 @@ class ToolBar(Frame):
                                   foreground="white",
                                   activeforeground="black",
                                   activebackground="gray52")
+       
+       #define la funcion verProductos que le da el dato de la ventana principal al 
+       # frame ver productos para que asi el treeview aparezca
+       #esta funcion es para que el boton haga algo
+        def verProductos():
+            FrameVerProductos(parent)
+
         #crea el menu desplegable de 
         menu_productos = tk.Menu(productos,tearoff=0)
         menu_productos.add_command(label="Ingresar Producto")
         menu_productos.add_command(label="Editar Producto")
-        menu_productos.add_command(label="Ver Productos")
+        menu_productos.add_command(label="Ver Productos",command= verProductos)
         
         editorial = tk.Menubutton(menu_frame,
                                   text="Editorial",
@@ -69,6 +77,7 @@ class ToolBar(Frame):
         menu_compras.add_command(label="Editar Compra")
         menu_compras.add_command(label="Ver Compras")
         
+        #acomoda los btns de la toolbar
         productos.config(menu=menu_productos)
         productos.pack(side="left")
 

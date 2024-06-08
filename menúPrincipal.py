@@ -32,6 +32,7 @@ imagen= PhotoImage(file=path_imagen)
 iLabel= tk.Label(ventana, image=imagen)
 #se acomoda la imagen 
 iLabel.place(relx=0.5 , rely=0.5,anchor=CENTER)
+#le pasa el valor ventana a toolbar para que asi esta aparezca en la arte superior de la ventana
 ToolBar(ventana)
-
+#inicia la ventana
 ventana.mainloop()
