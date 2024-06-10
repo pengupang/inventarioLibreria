@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from frameVerProductos import FrameVerProductos
+from frameVerEditorial import FrameVerEditorial
 
 
 class ToolBar(Frame):
@@ -29,6 +30,9 @@ class ToolBar(Frame):
         menu_productos.add_command(label="Editar Producto")
         menu_productos.add_command(label="Ver Productos",command= verProductos)
         
+        def verEditorial():
+            FrameVerEditorial(parent)
+
         #crea el btn Editorial
         editorial = tk.Menubutton(menu_frame,
                                   text="Editorial",
@@ -41,7 +45,7 @@ class ToolBar(Frame):
         menu_editoriales = tk.Menu(editorial,tearoff=0)
         menu_editoriales.add_command(label="Ingresar Editorial")
         menu_editoriales.add_command(label="Editar Editorial")
-        menu_editoriales.add_command(label="Ver Editoriales")
+        menu_editoriales.add_command(label="Ver Editoriales" , command=verEditorial)
         
         #crea el btn Proveedores
         proveedores = tk.Menubutton(menu_frame,
