@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from frameVerProductos import FrameVerProductos
+from frameVerEditorial import FrameVerEditorial
 
 
 class ToolBar(Frame):
@@ -23,12 +24,16 @@ class ToolBar(Frame):
         def verProductos():
             FrameVerProductos(parent)
 
-        #crea el menu desplegable de 
+        #crea el menu desplegable de productos
         menu_productos = tk.Menu(productos,tearoff=0)
         menu_productos.add_command(label="Ingresar Producto")
         menu_productos.add_command(label="Editar Producto")
         menu_productos.add_command(label="Ver Productos",command= verProductos)
         
+        def verEditorial():
+            FrameVerEditorial(parent)
+
+        #crea el btn Editorial
         editorial = tk.Menubutton(menu_frame,
                                   text="Editorial",
                                   background= "gray",
@@ -36,11 +41,13 @@ class ToolBar(Frame):
                                   activeforeground="black",
                                   activebackground="gray52")
         
+        #crea el menu desplegable de Editoriales
         menu_editoriales = tk.Menu(editorial,tearoff=0)
         menu_editoriales.add_command(label="Ingresar Editorial")
         menu_editoriales.add_command(label="Editar Editorial")
-        menu_editoriales.add_command(label="Ver Editoriales")
+        menu_editoriales.add_command(label="Ver Editoriales" , command=verEditorial)
         
+        #crea el btn Proveedores
         proveedores = tk.Menubutton(menu_frame,
                                   text="Proveedores",
                                   background= "gray",
@@ -48,11 +55,13 @@ class ToolBar(Frame):
                                   activeforeground="black",
                                   activebackground="gray52")
         
+        #crea el menu desplegable de Proveedores
         menu_proveedores = tk.Menu(proveedores,tearoff=0)
         menu_proveedores.add_command(label="Ingresar Proveedor")
         menu_proveedores.add_command(label="Editar Proveedor")
         menu_proveedores.add_command(label="Ver Proveedores")
 
+        #crea el btn Ventas
         ventas = tk.Menubutton(menu_frame,
                                   text="Ventas",
                                   background= "gray",
@@ -60,11 +69,12 @@ class ToolBar(Frame):
                                   activeforeground="black",
                                   activebackground="gray52")
         
+        #crea el menu desplegable de Ventas
         menu_ventas = tk.Menu(ventas,tearoff=0)
         menu_ventas.add_command(label="Ingresar Venta")
         menu_ventas.add_command(label="Ver Ventas")
 
-        
+        #crea el btn Compras
         compras = tk.Menubutton(menu_frame,
                                   text="Compras",
                                   background= "gray",
@@ -72,6 +82,7 @@ class ToolBar(Frame):
                                   activeforeground="black",
                                   activebackground="gray52")
         
+        #crea el menu desplegable de Compras
         menu_compras = tk.Menu(compras,tearoff=0)
         menu_compras.add_command(label="Ingresar Compra")
         menu_compras.add_command(label="Editar Compra")
