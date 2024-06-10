@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter as tk
-from frameVerProductos import FrameVerProductos
-from frameVerEditorial import FrameVerEditorial
+from Vista.VerProductos_view import FrameVerProductos
+from Vista.VerEditorial_view import FrameVerEditorial
 
 
 class ToolBar(Frame):
