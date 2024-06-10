@@ -2,7 +2,9 @@ from tkinter import *
 import tkinter as tk
 from Vista.VerProductos_view import FrameVerProductos
 from Vista.VerEditorial_view import FrameVerEditorial
-
+from Vista.VerProveedores_view import FrameVerProveedores
+from Vista.VerVentas_view import FrameVerVentas
+from Vista.VerCompras_view import FrameVerCompras
 
 class ToolBar(Frame):
     def __init__(self, parent):
@@ -47,6 +49,9 @@ class ToolBar(Frame):
         menu_editoriales.add_command(label="Editar Editorial")
         menu_editoriales.add_command(label="Ver Editoriales" , command=verEditorial)
         
+        def verProveedores():
+            FrameVerProveedores(parent)
+
         #crea el btn Proveedores
         proveedores = tk.Menubutton(menu_frame,
                                   text="Proveedores",
@@ -59,7 +64,10 @@ class ToolBar(Frame):
         menu_proveedores = tk.Menu(proveedores,tearoff=0)
         menu_proveedores.add_command(label="Ingresar Proveedor")
         menu_proveedores.add_command(label="Editar Proveedor")
-        menu_proveedores.add_command(label="Ver Proveedores")
+        menu_proveedores.add_command(label="Ver Proveedores", command=verProveedores)
+
+        def verVentas():
+            FrameVerVentas(parent)
 
         #crea el btn Ventas
         ventas = tk.Menubutton(menu_frame,
@@ -72,7 +80,10 @@ class ToolBar(Frame):
         #crea el menu desplegable de Ventas
         menu_ventas = tk.Menu(ventas,tearoff=0)
         menu_ventas.add_command(label="Ingresar Venta")
-        menu_ventas.add_command(label="Ver Ventas")
+        menu_ventas.add_command(label="Ver Ventas", command=verVentas)
+
+        def verCompras():
+            FrameVerCompras(parent)
 
         #crea el btn Compras
         compras = tk.Menubutton(menu_frame,
@@ -86,7 +97,7 @@ class ToolBar(Frame):
         menu_compras = tk.Menu(compras,tearoff=0)
         menu_compras.add_command(label="Ingresar Compra")
         menu_compras.add_command(label="Editar Compra")
-        menu_compras.add_command(label="Ver Compras")
+        menu_compras.add_command(label="Ver Compras",command=verCompras)
         
         #acomoda los btns de la toolbar
         productos.config(menu=menu_productos)
