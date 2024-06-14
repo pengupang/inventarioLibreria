@@ -1,41 +1,34 @@
-import customtkinter 
-from tkinter import *
-from tkinter import ttk
-
-class LoginView ():
-    def __init__(self) -> None:
-        pass
-    ventana = customtkinter.CTk()
-    customtkinter.set_appearance_mode("light")
-    customtkinter.set_default_color_theme("blue")        
-
-    ancho_pantalla = ventana.winfo_screenwidth()
-    alto_pantalla = ventana.winfo_screenheight()
-
-    ancho_ventana = 500
-    alto_ventana = 400
-    posicion_x = (ancho_pantalla - ancho_ventana) // 2 
-    posicion_y = (alto_pantalla - alto_ventana) // 2
-
-    lblUsuario = Label(text="Usuario")
-    lblUsuario.place(rely=0.45,relx=0.5,anchor=CENTER)
-
-    txtUsuario = ttk.Entry()
-    txtUsuario.place(rely=0.5,relx=0.5,anchor=CENTER)
-
-    lblContraseña = Label(text="Contraseña")
-    lblContraseña.place(rely=0.55,relx=0.5,anchor=CENTER)
-
-    txtContraseña = ttk.Entry()
-    txtContraseña.place(rely=0.6,relx=0.5,anchor=CENTER)
-
-    btnEntrar = customtkinter.CTkButton(ventana,text="Ingresar")
-    btnEntrar.place(rely=0.7,relx=0.5,anchor=CENTER)
+from customtkinter import *
 
 
+class LoginView (CTkFrame):
+    def __init__(self,master,callback) -> None:
+        super().__init__(master)
+        self.callback= callback
+        self.mostrar_Login()
+        
+    
+    def mostrar_Login(self):
+        self.configure(width=700,height=600)
+        self.pack_propagate(False)
 
-    ventana.geometry(f"{ancho_ventana}x{alto_ventana}+{posicion_x}+{posicion_y}")
+        self.lblUsuario = CTkLabel(self,text="Usuario")
+        self.lblUsuario.place(rely=0.45,relx=0.5,anchor=CENTER)
 
+        self.txtUsuario = CTkEntry(self)
+        self.txtUsuario.place(rely=0.5,relx=0.5,anchor=CENTER)
 
+        self.lblContraseña = CTkLabel(self,text="Contraseña")
+        self.lblContraseña.place(rely=0.55,relx=0.5,anchor=CENTER)
 
-    ventana.mainloop()
+        self.txtContraseña = CTkEntry(self)
+        self.txtContraseña.place(rely=0.6,relx=0.5,anchor=CENTER)
+
+        btnEntrar = CTkButton(self,text="Ingresar")
+        btnEntrar.configure(command=self.login)
+        btnEntrar.place(rely=0.7, relx=0.5, anchor=CENTER) 
+
+    def login(self):
+        usuario= self.txtUsuario.get()
+        contraseña = self.txtContraseña.get()
+        self.callback(usuario,contraseña)
