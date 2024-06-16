@@ -2,14 +2,16 @@ from tkinter import *
 import tkinter as tk
 
 class ToolBar(Frame):
-    def __init__(self, parent):
-        super().__init__(parent)
-
-        menu_frame= Frame(parent,background= "gray")
-        menu_frame.pack(side="top" , fill="x")
-
+    def __init__(self, master,callback):
+        super().__init__(master)
+        self.callback = callback
+        self.menu_frame= Frame(master,background= "gray")
+        self.menu_frame.pack(side="top" , fill="x")
+        self.crear_botones()
+    
+    def crear_botones(self):
         #crea el btn productos
-        productos = tk.Menubutton(menu_frame,
+        productos = tk.Menubutton(self.menu_frame,
                                   text="Productos",
                                   background= "gray",
                                   foreground="white",
@@ -19,14 +21,14 @@ class ToolBar(Frame):
         
         #crea el menu desplegable de productos
         menu_productos = tk.Menu(productos,tearoff=0)
-        menu_productos.add_command(label="Ingresar Producto", command= None)
-        menu_productos.add_command(label="Editar Producto", command= None)
-        menu_productos.add_command(label="Ver Productos",command= None)
+        menu_productos.add_command(label="Ingresar Producto", command= lambda: self.enviar_señal("Ingresar Producto"))
+        menu_productos.add_command(label="Editar Producto", command= lambda: self.enviar_señal("Editar Producto"))
+        menu_productos.add_command(label="Ver Productos",command= lambda: self.enviar_señal("Ver Producto"))
     
         
 
         #crea el btn Editorial
-        editorial = tk.Menubutton(menu_frame,
+        editorial = tk.Menubutton(self.menu_frame,
                                   text="Editorial",
                                   background= "gray",
                                   foreground="white",
@@ -35,13 +37,13 @@ class ToolBar(Frame):
         
         #crea el menu desplegable de Editoriales
         menu_editoriales = tk.Menu(editorial,tearoff=0)
-        menu_editoriales.add_command(label="Ingresar Editorial", command=None)
-        menu_editoriales.add_command(label="Editar Editorial", command=None)
-        menu_editoriales.add_command(label="Ver Editoriales" , command=None)
+        menu_editoriales.add_command(label="Ingresar Editorial", command=lambda: self.enviar_señal("Ingresar Editorial"))
+        menu_editoriales.add_command(label="Editar Editorial", command=lambda: self.enviar_señal("Editar Editorial"))
+        menu_editoriales.add_command(label="Ver Editoriales" , command=lambda: self.enviar_señal("Ver Editorial"))
         
 
         #crea el btn Proveedores
-        proveedores = tk.Menubutton(menu_frame,
+        proveedores = tk.Menubutton(self.menu_frame,
                                   text="Proveedores",
                                   background= "gray",
                                   foreground="white",
@@ -50,13 +52,13 @@ class ToolBar(Frame):
         
         #crea el menu desplegable de Proveedores
         menu_proveedores = tk.Menu(proveedores,tearoff=0)
-        menu_proveedores.add_command(label="Ingresar Proveedor", command=None)
-        menu_proveedores.add_command(label="Editar Proveedor", command=None)
-        menu_proveedores.add_command(label="Ver Proveedores", command=None)
+        menu_proveedores.add_command(label="Ingresar Proveedor", command=lambda: self.enviar_señal("Ingresar Proveedor"))
+        menu_proveedores.add_command(label="Editar Proveedor", command=lambda: self.enviar_señal("Editar Proveedor"))
+        menu_proveedores.add_command(label="Ver Proveedores", command=lambda: self.enviar_señal("Ver Proveedor"))
 
 
         #crea el btn Ventas
-        ventas = tk.Menubutton(menu_frame,
+        ventas = tk.Menubutton(self.menu_frame,
                                   text="Ventas",
                                   background= "gray",
                                   foreground="white",
@@ -65,12 +67,12 @@ class ToolBar(Frame):
         
         #crea el menu desplegable de Ventas
         menu_ventas = tk.Menu(ventas,tearoff=0)
-        menu_ventas.add_command(label="Ingresar Venta", command=None)
-        menu_ventas.add_command(label="Ver Ventas", command=None)
+        menu_ventas.add_command(label="Ingresar Venta", command=lambda: self.enviar_señal("Ingresar Venta"))
+        menu_ventas.add_command(label="Ver Ventas", command=lambda: self.enviar_señal("Ver Venta"))
 
 
         #crea el btn Compras
-        compras = tk.Menubutton(menu_frame,
+        compras = tk.Menubutton(self.menu_frame,
                                   text="Compras",
                                   background= "gray",
                                   foreground="white",
@@ -79,9 +81,9 @@ class ToolBar(Frame):
         
         #crea el menu desplegable de Compras
         menu_compras = tk.Menu(compras,tearoff=0)
-        menu_compras.add_command(label="Ingresar Compra", command=None)
-        menu_compras.add_command(label="Editar Compra", command=None)
-        menu_compras.add_command(label="Ver Compras",command=None)
+        menu_compras.add_command(label="Ingresar Compra", command=lambda: self.enviar_señal("Ingresar Compra"))
+        menu_compras.add_command(label="Editar Compra", command=lambda: self.enviar_señal("Editar Compra"))
+        menu_compras.add_command(label="Ver Compras",command=lambda: self.enviar_señal("Ver Compra"))
         
         #acomoda los btns de la toolbar
         productos.config(menu=menu_productos)
@@ -98,4 +100,8 @@ class ToolBar(Frame):
 
         compras.config(menu=menu_compras)
         compras.pack(side="left")
+    def enviar_señal(self,y):
+        texto=y
+        self.callback(texto)
+
       

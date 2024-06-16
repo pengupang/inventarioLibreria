@@ -2,20 +2,21 @@ import customtkinter as cTK
 import tkinter as tk
 from tkinter import ttk
 
-class FrameVerIngresarProductos():
-    def __init__(self,ventana) -> None:
-        
-        self.ventana = ventana
+class FrameVerIngresarProductos(cTK.CTkFrame):
+    def __init__(self,master) -> None:
+        super().__init__(master)
+        self.mostrarIngresarProductos()
 
-        label_id = tk.Label(ventana, text="ID:")
-        label_titulo = tk.Label(ventana, text="Título:")
-        label_autor = tk.Label(ventana, text="Autor:")
-        label_stock = tk.Label(ventana, text="Stock:")
+    def mostrarIngresarProductos(self):
+        label_id = cTK.CTkLabel(self, text="ID:")
+        label_titulo = cTK.CTkLabel(self, text="Título:")
+        label_autor = cTK.CTkLabel(self, text="Autor:")
+        label_stock = cTK.CTkLabel(self, text="Stock:")
         
-        self.entry_id = tk.Entry(ventana)
-        self.entry_titulo = tk.Entry(ventana)
-        self.entry_autor = tk.Entry(ventana)
-        self.entry_stock = tk.Entry(ventana)
+        self.entry_id = cTK.CTkEntry(self)
+        self.entry_titulo = cTK.CTkEntry(self)
+        self.entry_autor = cTK.CTkEntry(self)
+        self.entry_stock = cTK.CTkEntry(self)
         
         label_id.place(x=50, y=50)
         self.entry_id.place(x=150, y=50)
@@ -30,10 +31,10 @@ class FrameVerIngresarProductos():
         self.entry_stock.place(x=150, y=140)
         
         
-        self.btn_ingresar = tk.Button(ventana, text="Ingresar", command=self.guardar_datos)
+        self.btn_ingresar =cTK.CTkButton(self, text="Ingresar", command=self.guardar_datos)
         self.btn_ingresar.place(x=50, y=200)
         
-        self.tabla = ttk.Treeview(ventana)
+        self.tabla = ttk.Treeview(self)
         self.tabla['columns'] = ("ID", "Titulo Libro", "Fecha", "Autor", "Stock")
         self.tabla.column("#0", width=0)
         self.tabla.heading("ID", text="ID")
@@ -47,7 +48,7 @@ class FrameVerIngresarProductos():
         id_value = self.entry_id.get()
         titulo_value = self.entry_titulo.get()
         autor_value = self.entry_autor.get()
-        stock_value = self.entry_cantidad.get()
+        stock_value = self.entry_stock.get()
         
 
         self.tabla.insert("", "end", values=(id_value, titulo_value, autor_value, stock_value))

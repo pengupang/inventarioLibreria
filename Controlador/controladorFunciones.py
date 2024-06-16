@@ -2,7 +2,7 @@ class ControladorFunciones:
     def __init__(self):
         # Usuarios de prueba para ingresar
         self.usuarios_validos = {
-            "user1": "password1",
+            "q": "a",
             "user2": "password2"
         }
 
