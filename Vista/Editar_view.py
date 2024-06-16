@@ -1,6 +1,6 @@
 from customtkinter import * 
 from tkinter import ttk
-# En esta clase se cargan los frames de cada boton dedicados solamente a la edición de daots de la BD
+# En esta clase se cargan los frames de cada boton dedicados solamente a la edición de datos de la BD
 class EditarFrames():
     def __init__(self,master) -> None:
         super().__init__(master)
