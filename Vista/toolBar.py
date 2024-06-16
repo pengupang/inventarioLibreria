@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
-
+# En esta clase se crean los botones y eventos relacionados a estos
+#que permiten el movimiento entre los diferentes frames que posee la aplicación
 class ToolBar(Frame):
     def __init__(self, master,callback):
         super().__init__(master)

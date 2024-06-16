@@ -1,6 +1,6 @@
 from customtkinter import * 
 from tkinter import ttk
-
+# En esta clase se cargan los frames de cada boton dedicados solamente a ingresar datos de la BD
 class IngresarFrames ():
     def __init__(self,master) -> None:
         self.master=master

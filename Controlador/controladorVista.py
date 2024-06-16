@@ -7,6 +7,7 @@ from Vista.login_view import LoginView
 from Vista.Ver_view import VerFrames
 from Vista.toolBar import ToolBar
 
+#Controlador encargado de realizar los cambios de frames dentro de la ventana principal
 class Controlador_vista ():
     def __init__(self) -> None:
         #define la ventana y el controlador de funciones

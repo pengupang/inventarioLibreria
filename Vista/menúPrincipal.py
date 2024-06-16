@@ -1,7 +1,8 @@
 import os
 from customtkinter import *
 
-
+# En esta clase Es donde aparecen todos los frames
+#Es el contenedor pricipal
 class VentanaPrincipal (CTk):
     def __init__(self) -> None:
         super().__init__()

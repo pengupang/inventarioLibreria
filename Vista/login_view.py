@@ -1,6 +1,8 @@
 from customtkinter import *
 
-
+# En esta clase se carga Exclusivamente el frame de login 
+#Ademas se envian datos desde los cuadros de texto a la determinada funcion que 
+#realiza la verificación de usuario
 class LoginView (CTkFrame):
     def __init__(self,master,callback) -> None:
         super().__init__(master)
