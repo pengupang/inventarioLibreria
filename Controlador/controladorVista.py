@@ -48,15 +48,15 @@ class Controlador_vista ():
         self.mostrar_toolbar()
 
         if texto == "Ver Compra":
-            self.frame_actual=VerFrames.verCompras(self.ventana)
+            self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verCompras()
         elif texto == "Ver Editorial":
-             self.frame_actual=VerFrames.verEditoriales(self.ventana)
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verEditoriales()
         elif texto == "Ver Producto":
-             self.frame_actual=VerFrames.verProductos(self.ventana)
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verProductos()
         elif texto == "Ver Proveedor":
-             self.frame_actual=VerFrames.verProveedores(self.ventana)
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verProveedores()
         elif texto == "Ver Venta":
-             self.frame_actual=VerFrames.verVentas(self.ventana)
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verVentas()
 
         elif texto == "Ingresar Compra":
              self.frame_actual=IngresarFrames.IngresarCompras(self.ventana)

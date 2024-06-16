@@ -2,10 +2,11 @@ from customtkinter import *
 from tkinter import ttk
 # En esta clase se cargan los frames de cada boton dedicados solamente a la Visualzación de datos de la BD
 class VerFrames():
-    def __init__(self,master) -> None:
+    def __init__(self,master,callback) -> None:
+        self.callback=callback
         self.master=master
     def verCompras(self):
-        tabla = ttk.Treeview(self)
+        tabla = ttk.Treeview(self.master)
         #crea columnas
         tabla['columns']=("1","2","3","4","5")
         #cambia ancho de columna id
@@ -18,9 +19,10 @@ class VerFrames():
         tabla.heading("5",text="Total Compra")
         #acomoda la tabla en la ventana
         tabla.place(x=325,y=300,anchor="center")
+        
     
     def verEditoriales(self):
-        tabla = ttk.Treeview(self)
+        tabla = ttk.Treeview(self.master)
         #crea columnas
         tabla['columns']=("1","2")
         #cambia ancho de columna id
@@ -30,9 +32,11 @@ class VerFrames():
         tabla.heading("2",text="Nombre")
         #acomoda la tabla en la ventana
         tabla.place(x=325,y=300,anchor="center")
+        query="SELECT * FROM editorial;"
+        self.evento_querys(tabla,query)
 
     def verProductos(self):
-        tabla = ttk.Treeview(self)
+        tabla = ttk.Treeview(self.master)
         #crea columnas
         tabla['columns']=("1","2","3","4")
         #cambia ancho de columna id
@@ -45,9 +49,11 @@ class VerFrames():
         tabla.heading("4",text="Stock")
         #acomoda la tabla en la ventana
         tabla.place(x=325,y=300,anchor="center")
+        query="SELECT * FROM libro"
+        self.evento_querys(tabla,query)
 
     def verProveedores(self):
-        tabla = ttk.Treeview(self)
+        tabla = ttk.Treeview(self.master)
         #crea columnas
         tabla['columns']=("1","2")
         #cambia ancho de columna id
@@ -58,10 +64,12 @@ class VerFrames():
         tabla.heading("2",text="Nombre")
         #acomoda la tabla en la ventana
         tabla.place(x=325,y=300,anchor="center")
+        query="SELECT * FROM proveedor;"
+        self.evento_querys(tabla,query)
     
     def verVentas(self):
         #crea tabla 
-        tabla = ttk.Treeview(self)
+        tabla = ttk.Treeview(self.master)
         #crea columnas
         tabla['columns']=("1","2","3","4","5")
         #cambia ancho de columna id
@@ -74,3 +82,9 @@ class VerFrames():
         tabla.heading("5",text="Total venta")
         #acomoda la tabla en la ventana
         tabla.place(x=325,y=300,anchor="center")
+
+    def evento_querys(self,tabla,query):
+        print(query)
+        self.callback(tabla,query)
+    
+        

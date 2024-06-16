@@ -16,4 +16,11 @@ class ControladorFunciones:
             print("contraseñas mal puestas") 
     
     
-  
+    def cargarDatos(self,tabla,query):
+        resultados= conexion.ejecutar_consulta(query)
+        print(resultados)
+        if resultados:
+                for row in resultados:
+                    tabla.insert("", "end", values=row)
+        else:
+                print("No se encontraron registros")
