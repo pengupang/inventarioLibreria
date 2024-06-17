@@ -127,7 +127,5 @@ class IngresarFrames ():
         self.btn_ingresar = CTkButton(self.master, text="Ingresar", command=None)
         self.btn_ingresar.place(x=50, y=200)
 
-    def llamada(self,texto):
-        self.callback(texto)
         
         
