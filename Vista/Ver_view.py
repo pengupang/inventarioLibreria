@@ -2,15 +2,16 @@ from customtkinter import *
 from tkinter import ttk
 # En esta clase se cargan los frames de cada boton dedicados solamente a la Visualzación de datos de la BD
 class VerFrames():
-    def __init__(self,master,callback) -> None:
+    def __init__(self,master,callback,barraBusqueda) -> None:
         self.callback=callback
         self.master=master
+        self.barraBusqueda = barraBusqueda
 
     def verCompras(self):
         buscador = CTkEntry(self.master)
         tabla = ttk.Treeview(self.master)
         query="SELECT * FROM compras"
-        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self._buscarElemento(tabla,buscador,query))
+        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
         #crea columnas
         tabla['columns']=("1","2","3","4","5")
         #cambia ancho de columna id
@@ -32,7 +33,7 @@ class VerFrames():
         buscador = CTkEntry(self.master)
         tabla = ttk.Treeview(self.master)
         query="SELECT * FROM editorial;"
-        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self._buscarElemento(tabla,buscador,query))
+        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
         #crea columnas
         tabla['columns']=("1","2")
         #cambia ancho de columna id
@@ -51,7 +52,7 @@ class VerFrames():
         buscador = CTkEntry(self.master)
         tabla = ttk.Treeview(self.master)
         query="SELECT * FROM libro"
-        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self._buscarElemento(tabla,buscador,query))
+        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
         #crea columnas
         tabla['columns']=("1","2","3","4")
         #cambia ancho de columna id
@@ -72,7 +73,7 @@ class VerFrames():
         buscador = CTkEntry(self.master)
         tabla = ttk.Treeview(self.master)
         query="SELECT * FROM proveedor;"
-        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self._buscarElemento(tabla,buscador,query))
+        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
         #crea columnas
         tabla['columns']=("1","2")
         #cambia ancho de columna id
@@ -92,7 +93,7 @@ class VerFrames():
         query="SELECT * FROM ventas;"
         #crea tabla 
         tabla = ttk.Treeview(self.master)
-        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self._buscarElemento(tabla,buscador,query))
+        boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
         #crea columnas
         tabla['columns']=("1","2","3","4","5")
         #cambia ancho de columna id
@@ -112,27 +113,3 @@ class VerFrames():
     def evento_querys(self,tabla,query):
         print(query)
         self.callback(tabla,query)
-
-    def buscarElemento(self,tabla,entry):
-        resultados = []
-        for x in tabla.get_children():
-            print("fila a comparar: ", tabla.item(x)['values'][1].lower())
-            if entry.get().lower() == tabla.item(x)['values'][1].lower():
-                resultados.append(x)
-                print("resultado: ",resultados)
-        if len(resultados) > 0:
-            print("se encontraron:",len(resultados)," resultado/s.")
-            tabla.selection_set(resultados)
-            tabla.see(resultados[0])
-        
-
-    def _buscarElemento(self,tabla,entry,query):
-        busqueda = entry.get()
-        if len(busqueda) > 0:
-            print("busqueda: ",busqueda.lower())
-            self.buscarElemento(tabla,entry)
-        else:
-            tabla.delete(*tabla.get_children())
-            self.callback(tabla,query)
-        
-            
