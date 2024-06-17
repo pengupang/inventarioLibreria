@@ -25,7 +25,7 @@ class VerFrames():
         tabla.place(x=325,y=300,anchor="center")
         buscador.place(x=75,y=130,anchor="center")
         boton_bus.place(x=220,y=130,anchor="center")
-        self.evento_querys(tabla,query)
+        self.callback(tabla,query)
         
     
     def verEditoriales(self):
@@ -44,7 +44,7 @@ class VerFrames():
         tabla.place(x=325,y=300,anchor="center")
         buscador.place(x=75,y=130,anchor="center")
         boton_bus.place(x=220,y=130,anchor="center")
-        self.evento_querys(tabla,query)
+        self.callback(tabla,query)
 
     def verProductos(self):
 
@@ -66,7 +66,7 @@ class VerFrames():
         tabla.place(x=325,y=300,anchor="center")
         buscador.place(x=75,y=130,anchor="center")
         boton_bus.place(x=220,y=130,anchor="center")
-        self.evento_querys(tabla,query)
+        self.callback(tabla,query)
 
     def verProveedores(self):
         buscador = CTkEntry(self.master)
@@ -85,7 +85,7 @@ class VerFrames():
         tabla.place(x=325,y=300,anchor="center")
         buscador.place(x=75,y=130,anchor="center")
         boton_bus.place(x=220,y=130,anchor="center")
-        self.evento_querys(tabla,query)
+        self.callback(tabla,query)
     
     def verVentas(self):
         buscador = CTkEntry(self.master)
@@ -107,11 +107,10 @@ class VerFrames():
         tabla.place(x=325,y=300,anchor="center")
         buscador.place(x=75,y=130,anchor="center")
         boton_bus.place(x=220,y=130,anchor="center")
-        self.evento_querys(tabla,query)
-
-    def evento_querys(self,tabla,query):
-        print(query)
         self.callback(tabla,query)
+
+    
+        
 
     def buscarElemento(self,tabla,entry):
         resultados = []
