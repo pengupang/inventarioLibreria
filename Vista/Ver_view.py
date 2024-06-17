@@ -51,7 +51,7 @@ class VerFrames():
 
         buscador = CTkEntry(self.master)
         tabla = ttk.Treeview(self.master)
-        query="SELECT * FROM libro"
+        query="SELECT libro.ID,Titulo,Autor.nombre,Stock FROM libro INNER JOIN autor_libro ON libro.ID = autor_libro.ID_Libro INNER JOIN autor ON autor.ID = autor_libro.ID_Autor "
         boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
         #crea columnas
         tabla['columns']=("1","2","3","4")
