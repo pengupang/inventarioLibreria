@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2024 a las 22:29:44
+-- Tiempo de generación: 17-06-2024 a las 22:31:39
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -154,6 +154,7 @@ INSERT INTO `libro` (`ID`, `Titulo`, `Stock`) VALUES
 
 CREATE TABLE `movimiento` (
   `ID` int(11) NOT NULL,
+  `ID_Libro` int(11) NOT NULL,
   `ID_Tipo_movimiento` int(11) NOT NULL,
   `Fecha` date NOT NULL,
   `Total_neto` int(11) NOT NULL
@@ -163,9 +164,9 @@ CREATE TABLE `movimiento` (
 -- Volcado de datos para la tabla `movimiento`
 --
 
-INSERT INTO `movimiento` (`ID`, `ID_Tipo_movimiento`, `Fecha`, `Total_neto`) VALUES
-(1, 1, '2024-04-17', 7000),
-(2, 1, '2024-04-17', 7000);
+INSERT INTO `movimiento` (`ID`, `ID_Libro`, `ID_Tipo_movimiento`, `Fecha`, `Total_neto`) VALUES
+(1, 1, 1, '2024-04-17', 7000),
+(2, 2, 1, '2024-04-17', 7000);
 
 -- --------------------------------------------------------
 
@@ -274,7 +275,8 @@ ALTER TABLE `libro`
 --
 ALTER TABLE `movimiento`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `ID_Tipo_movimiento` (`ID_Tipo_movimiento`);
+  ADD KEY `ID_Tipo_movimiento` (`ID_Tipo_movimiento`),
+  ADD KEY `ID_Libro` (`ID_Libro`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -375,7 +377,8 @@ ALTER TABLE `editorial_libro`
 -- Filtros para la tabla `movimiento`
 --
 ALTER TABLE `movimiento`
-  ADD CONSTRAINT `movimiento_ibfk_1` FOREIGN KEY (`ID_Tipo_movimiento`) REFERENCES `tipo_movimiento` (`ID`);
+  ADD CONSTRAINT `movimiento_ibfk_1` FOREIGN KEY (`ID_Tipo_movimiento`) REFERENCES `tipo_movimiento` (`ID`),
+  ADD CONSTRAINT `movimiento_ibfk_2` FOREIGN KEY (`ID_Libro`) REFERENCES `libro` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
