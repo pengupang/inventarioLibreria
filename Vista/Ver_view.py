@@ -111,3 +111,9 @@ class VerFrames():
         self.callback(tabla,query)
 
    
+
+        self.evento_querys(tabla,query)
+
+    def evento_querys(self,tabla,query):
+        print(query)
+        self.callback(tabla,query)
