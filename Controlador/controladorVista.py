@@ -61,12 +61,12 @@ class Controlador_vista ():
              self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verVentas()
 
         elif texto == "Ingresar Compra":
-             self.frame_actual=IngresarFrames.IngresarCompras(self.ventana)
+             self.frame_actual=IngresarFrames(self.ventana).IngresarCompras
         elif texto == "Ingresar Editorial":
              self.frame_actual=IngresarFrames.IngresarEditorial(self.ventana)
         elif texto == "Ingresar Producto":
-             self.frame_actual=IngresarFrames(self.ventana, self.controlador_funciones.guardar_datos)
-             self.frame_actual.IngresarProveedores()
+             self.frame_actual=IngresarFrames(self.ventana).IngresarProductos()
+             
         elif texto == "Ingresar Proveedor":
              self.frame_actual=IngresarFrames.IngresarProveedores(self.ventana)
         elif texto == "Ingresar Venta":

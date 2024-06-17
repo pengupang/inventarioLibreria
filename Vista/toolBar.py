@@ -101,8 +101,8 @@ class ToolBar(Frame):
 
         compras.config(menu=menu_compras)
         compras.pack(side="left")
+    
     def enviar_señal(self,y):
-        texto=y
-        self.callback(texto)
+        self.callback(y)
 
       
