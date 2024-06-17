@@ -38,7 +38,7 @@ class EditarFrames():
         
         #genera botones
         self.btn_ingresar = CTkButton(self, text="Ingresar", command=None)
-        self.btn_ingresar.place(x=50, y=200)
+        self.btn_ingresar.place(x=50, y=190)
         
         self.btn_editar = CTkButton(self, text="Editar", command=None)
         self.btn_editar.place(x=150, y=200)

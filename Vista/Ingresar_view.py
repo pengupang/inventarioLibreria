@@ -34,7 +34,7 @@ class IngresarFrames ():
         self.entry_total.place(x=150, y=170)
         
         self.btn_ingresar = CTkButton(self, text="Ingresar", command=None)
-        self.btn_ingresar.place(x=50, y=200)
+        self.btn_ingresar.place(x=55, y=210)
     
     def IngresarEditorial(self):
         label_id = CTkLabel(self, text="ID:")
@@ -78,6 +78,8 @@ class IngresarFrames ():
         
         self.btn_ingresar =CTkButton(self, text="Ingresar", command=None)
         self.btn_ingresar.place(x=50, y=200)
+
+        
 
     def IngresarProveedores(self):
         label_id = CTkLabel(self, text="ID:")

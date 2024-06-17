@@ -24,3 +24,20 @@ class ControladorFunciones:
                     tabla.insert("", "end", values=row)
         else:
                 print("No se encontraron registros")
+
+    def guardar_datos(self):
+        id_value = self.entry_id.get()
+        titulo_value = self.entry_titulo.get()
+        autor_value = self.entry_autor.get()
+        stock_value = self.entry_stock.get()
+
+        sql = "INSERT INTO nombre_de_la_tabla (ID, Titulo, Autor, Stock) VALUES (%s, %s, %s, %s)"
+        val = (id_value, titulo_value, autor_value, stock_value)
+
+        # Ejecutar la consulta SQL
+        self.cursor.execute(sql, val)
+
+        # Confirmar la transacción
+        self.conexion.commit()
+
+        

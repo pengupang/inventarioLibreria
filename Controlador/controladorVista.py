@@ -7,6 +7,7 @@ from Vista.login_view import LoginView
 from Vista.Ver_view import VerFrames
 from Vista.toolBar import ToolBar
 
+
 #Controlador encargado de realizar los cambios de frames dentro de la ventana principal
 class Controlador_vista ():
     def __init__(self) -> None:
@@ -44,7 +45,8 @@ class Controlador_vista ():
     def cambiarFrame(self,texto):
         for widget in self.ventana.winfo_children():
             widget.destroy()
-        
+
+ 
         self.mostrar_toolbar()
 
         if texto == "Ver Compra":
@@ -63,7 +65,8 @@ class Controlador_vista ():
         elif texto == "Ingresar Editorial":
              self.frame_actual=IngresarFrames.IngresarEditorial(self.ventana)
         elif texto == "Ingresar Producto":
-             self.frame_actual=IngresarFrames.IngresarProductos(self.ventana)
+             self.frame_actual=IngresarFrames(self.ventana, self.controlador_funciones.guardar_datos)
+             self.frame_actual.IngresarProveedores()
         elif texto == "Ingresar Proveedor":
              self.frame_actual=IngresarFrames.IngresarProveedores(self.ventana)
         elif texto == "Ingresar Venta":
