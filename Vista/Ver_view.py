@@ -10,7 +10,8 @@ class VerFrames():
     def verCompras(self):
         buscador = CTkEntry(self.master)
         tabla = ttk.Treeview(self.master)
-        query="SELECT * FROM compras"
+        query="""SELECT detalle_movimiento.ID,libro.Titulo,movimiento.Fecha,detalle_movimiento.Cantidad,movimiento.Total_neto FROM detalle_movimiento INNER JOIN movimiento 
+        ON movimiento.ID = detalle_movimiento.ID_Movimiento INNER JOIN libro ON libro.ID = detalle_movimiento.ID_Libro WHERE movimiento.ID_Tipo_movimiento = 2;"""
         boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
         #crea columnas
         tabla['columns']=("1","2","3","4","5")
@@ -90,7 +91,8 @@ class VerFrames():
     
     def verVentas(self):
         buscador = CTkEntry(self.master)
-        query="SELECT * FROM ventas;"
+        query="""SELECT detalle_movimiento.ID,libro.Titulo,movimiento.Fecha,detalle_movimiento.Cantidad,movimiento.Total_neto FROM detalle_movimiento INNER JOIN movimiento 
+        ON movimiento.ID = detalle_movimiento.ID_Movimiento INNER JOIN libro ON libro.ID = detalle_movimiento.ID_Libro WHERE movimiento.ID_Tipo_movimiento = 1;"""
         #crea tabla 
         tabla = ttk.Treeview(self.master)
         boton_bus = CTkButton(self.master, text="Buscar",command=lambda: self.barraBusqueda(tabla,buscador,query))
@@ -112,8 +114,4 @@ class VerFrames():
 
    
 
-        self.evento_querys(tabla,query)
 
-    def evento_querys(self,tabla,query):
-        print(query)
-        self.callback(tabla,query)
