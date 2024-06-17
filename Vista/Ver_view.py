@@ -108,6 +108,10 @@ class VerFrames():
         tabla.place(x=325,y=300,anchor="center")
         buscador.place(x=75,y=130,anchor="center")
         boton_bus.place(x=220,y=130,anchor="center")
+        self.callback(tabla,query)
+
+   
+
         self.evento_querys(tabla,query)
 
     def evento_querys(self,tabla,query):
