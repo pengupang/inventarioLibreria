@@ -108,39 +108,6 @@ class VerFrames():
         tabla.place(x=325,y=300,anchor="center")
         buscador.place(x=75,y=130,anchor="center")
         boton_bus.place(x=220,y=130,anchor="center")
-<<<<<<< HEAD
-        self.evento_querys(tabla,query)
-
-    def evento_querys(self,tabla,query):
-        print(query)
-        self.callback(tabla,query)
-=======
         self.callback(tabla,query)
 
-    
-        
-
-    def buscarElemento(self,tabla,entry):
-        resultados = []
-        for x in tabla.get_children():
-            print("fila a comparar: ", tabla.item(x)['values'][1].lower())
-            if entry.get().lower() == tabla.item(x)['values'][1].lower():
-                resultados.append(x)
-                print("resultado: ",resultados)
-        if len(resultados) > 0:
-            print("se encontraron:",len(resultados)," resultado/s.")
-            tabla.selection_set(resultados)
-            tabla.see(resultados[0])
-        
-
-    def _buscarElemento(self,tabla,entry,query):
-        busqueda = entry.get()
-        if len(busqueda) > 0:
-            print("busqueda: ",busqueda.lower())
-            self.buscarElemento(tabla,entry)
-        else:
-            tabla.delete(*tabla.get_children())
-            self.callback(tabla,query)
-        
-            
->>>>>>> 9010d6e2fbc1daf963e2c72f350d7e4c96ed3bb0
+   
