@@ -64,7 +64,7 @@ class Controlador_vista ():
         elif texto == "Ingresar Editorial":
              self.frame_actual=IngresarFrames.IngresarEditorial(self.ventana)
         elif texto == "Ingresar Producto":
-             self.frame_actual=IngresarFrames(self.ventana).IngresarProductos()
+             self.frame_actual=IngresarFrames(self.ventana, self.controlador_funciones.guardar_datos).IngresarProductos()
              
         elif texto == "Ingresar Proveedor":
              self.frame_actual=IngresarFrames.IngresarProveedores(self.ventana)

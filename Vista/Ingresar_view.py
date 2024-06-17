@@ -1,8 +1,9 @@
 from customtkinter import * 
 # En esta clase se cargan los frames de cada boton dedicados solamente a ingresar datos de la BD
 class IngresarFrames ():
-    def __init__(self,master) -> None:
+    def __init__(self,master, callback) -> None:
          self.master=master
+         self.callback = callback
 
     def IngresarCompras(self):
         label_id = CTkLabel(self.master, text="ID:")
@@ -52,33 +53,27 @@ class IngresarFrames ():
         self.btn_ingresar.place(x=50, y=100)
       
     def IngresarProductos(self):
-        label_id = CTkLabel(self.master, text="ID:")
+       
         label_titulo = CTkLabel(self.master, text="Título:")
-        label_autor = CTkLabel(self.master, text="Autor:")
         label_stock = CTkLabel(self.master, text="Stock:")
         
-        self.entry_id = CTkEntry(self.master)
         self.entry_titulo = CTkEntry(self.master)
-        self.entry_autor = CTkEntry(self.master)
         self.entry_stock = CTkEntry(self.master)
-        
-        label_id.place(x=50, y=50)
-        self.entry_id.place(x=150, y=50)
-        
+
+        titulo = self.entry_titulo.get()
+        stock = self.entry_stock.get()
+
         label_titulo.place(x=50, y=80)
         self.entry_titulo.place(x=150, y=80)
         
-        label_autor.place(x=50, y=110)
-        self.entry_autor.place(x=150, y=110)
-        
-        label_stock.place(x=50, y=140)
-        self.entry_stock.place(x=150, y=140)
+        label_stock.place(x=50, y=110)
+        self.entry_stock.place(x=150, y=110)
         
         
         self.btn_ingresar =CTkButton(self.master, text="Ingresar", command=None)
-        self.btn_ingresar.place(x=50, y=200)
+        self.btn_ingresar.place(x=50, y=140)
 
-        
+        self.callback(titulo, stock)
 
     def IngresarProveedores(self):
         label_id = CTkLabel(self.master, text="ID:")
