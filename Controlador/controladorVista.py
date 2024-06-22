@@ -50,26 +50,24 @@ class Controlador_vista ():
         self.mostrar_toolbar()
 
         if texto == "Ver Compra":
-            self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verCompras()
+            self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verCompras()
         elif texto == "Ver Editorial":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verEditoriales()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verEditoriales()
         elif texto == "Ver Producto":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verProductos()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verProductos()
         elif texto == "Ver Proveedor":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verProveedores()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verProveedores()
         elif texto == "Ver Venta":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verVentas()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verVentas()
+
         elif texto == "Ingresar Compra":
-             self.frame_actual=IngresarFrames(self.ventana).IngresarCompras
+             self.frame_actual=IngresarFrames(self.ventana).IngresarCompras()
         elif texto == "Ingresar Editorial":
-             self.frame_actual=IngresarFrames.IngresarEditorial(self.ventana)
+             self.frame_actual=IngresarFrames(self.ventana).IngresarEditorial()
         elif texto == "Ingresar Producto":
-             self.frame_actual=IngresarFrames(self.ventana, self.controlador_funciones.guardar_datos).IngresarProductos()
-             
-        elif texto == "Ingresar Proveedor":
-             self.frame_actual=IngresarFrames.IngresarProveedores(self.ventana)
+             self.frame_actual=IngresarFrames(self.ventana).IngresarProductos()
         elif texto == "Ingresar Venta":
-             self.frame_actual=IngresarFrames.IngresarVentas(self.ventana)
+             self.frame_actual=IngresarFrames(self.ventana).IngresarVentas()
 
         elif texto == "Editar Compra":
              self.frame_actual=EditarFrames.EditarCompras(self.ventana)
