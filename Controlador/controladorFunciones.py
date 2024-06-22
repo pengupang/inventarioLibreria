@@ -1,6 +1,6 @@
 #Controlador encargado de realizar funciones que necesiten pasar por la base de datos
 # y realizar un retorno de datos 
-
+from tkinter import messagebox
 from Modelo import conexion
 class ControladorFunciones:
 
@@ -13,15 +13,19 @@ class ControladorFunciones:
         if resultados:
             return True  
         else:
-            print("contraseñas mal puestas") 
+            #en caso de que los datos ingresados sean incorrectos muestra un warning avisando
+            #el error
+            messagebox.showwarning(title=None, message="Datos introducidos incorrectos")
+            print("Datos mal puestos") 
     
-    
+    # Carga los datos a las tablas 
     def cargarDatos(self,tabla,query):
         resultados= conexion.ejecutar_consulta(query)
         if resultados:
                 for row in resultados:
                     tabla.insert("", "end", values=row)
-        else:
+        else:  #En caso de estar la tabla vacia en la BD muestra un alert de informacion
+                messagebox.showinfo(title= None, message="No se encontraron registros")
                 print("No se encontraron registros")
 
     def guardar_datos(self, titulo_value, stock_value):

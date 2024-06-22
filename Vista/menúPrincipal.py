@@ -15,6 +15,6 @@ class VentanaPrincipal (CTk):
         posicion_x = (ancho_pantalla - ancho_ventana) // 2 
         posicion_y = (alto_pantalla - alto_ventana) // 2
         self.geometry(f"{ancho_ventana}x{alto_ventana}+{posicion_x}+{posicion_y}")
-
+        self.config(background="#dbdbdb")
         self.main_frame = None
 

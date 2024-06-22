@@ -40,7 +40,7 @@ class Controlador_vista ():
         #funcion que muestra la toolbar en la ventana principal
     def mostrar_toolbar(self):
         self.toolbar = ToolBar(self.ventana, self.cambiarFrame)
-        self.toolbar.pack(fill="both",expand=True)
+        self.toolbar.pack(fill="x")
     
     def cambiarFrame(self,texto):
         for widget in self.ventana.winfo_children():
