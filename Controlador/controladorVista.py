@@ -49,4 +49,3 @@ class Controlador_vista ():
  
         self.mostrar_toolbar()
 
-    
