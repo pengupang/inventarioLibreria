@@ -1,5 +1,5 @@
 from customtkinter import * 
-from Modelo.conexion import insertar_datos
+from Controlador.controladorFunciones import *
 
 # En esta clase se cargan los frames de cada boton dedicados solamente a ingresar datos de la BD
 class IngresarFrames ():
@@ -27,7 +27,7 @@ class IngresarFrames ():
         self.btn_ingresar = CTkButton(
             self.master,
             text="Ingresar",
-            command=lambda: self.insertar_producto(
+            command=lambda:ControladorFunciones.insertar_datos(
                 "movimiento",
                 ["ID_Tipo_movimiento", "Fecha", "Total_neto"],
                 [self.entry_idtype.get(), self.entry_fecha.get(), self.entry_total.get()]
@@ -47,7 +47,7 @@ class IngresarFrames ():
         self.btn_ingresar = CTkButton(
             self.master,
             text="Ingresar",
-            command=lambda: self.insertar_producto(
+            command= lambda:ControladorFunciones.insertar_datos(
                 "editorial",
                 ["Nombre"],
                 [self.entry_nombre.get()]
@@ -74,7 +74,7 @@ class IngresarFrames ():
         self.btn_ingresar = CTkButton(
             self.master,
             text="Ingresar",
-            command=lambda: self.insertar_producto(
+            command=lambda:ControladorFunciones.insertar_datos(
                 "libro",
                 ["titulo", "stock"],
                 [self.entry_titulo.get(), self.entry_stock.get()]
@@ -117,8 +117,6 @@ class IngresarFrames ():
         #en la base de datos no hay ventas ni compras, compras fue cambiado a movimiento(ingresarCompras = ingresarMovimiento)
         #Proveedor fue borrado 
 
-    def insertar_producto(self,tabla,campos,valores):
-            insertar_datos(tabla, campos, valores)
 
       
         

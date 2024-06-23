@@ -28,15 +28,19 @@ class ControladorFunciones:
                 messagebox.showinfo(title= None, message="No se encontraron registros")
                 print("No se encontraron registros")
 
-    def guardar_datos(self, titulo_value, stock_value):
+    def insertar_datos(tabla, campos, valores):
+        campos_str = ", ".join(campos)
+        placeholders = ", ".join(["%s"] * len(valores))
+        query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
 
-        sql = "INSERT INTO libro (Titulo, Stock) VALUES (%s, %s)"
-        val = (titulo_value, stock_value)
-        print(val)
-        # Ejecutar la consulta SQL
-        conexion.ejecutar_comando(sql, val)
-
-
+        resultado = conexion.ejecutar_comando(query, valores)
+        
+        if resultado:
+            messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
+            print(f"Datos insertados correctamente en la tabla {tabla}.")
+        else:
+            messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
+            print(f"Error al insertar datos en la tabla {tabla}.")
 
     def buscarElemento(self,tabla,entry):
         resultados = []
