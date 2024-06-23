@@ -1,3 +1,4 @@
+
 #imports de clases
 from Controlador.controladorFunciones import ControladorFunciones
 from Vista.Editar_view import EditarFrames
@@ -51,14 +52,19 @@ class Controlador_vista ():
         self.mostrar_toolbar()
 
         if texto == "Ver Compra":
+            self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verCompras()
             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verCompras()
         elif texto == "Ver Editorial":
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verEditoriales()
              self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verEditoriales()
         elif texto == "Ver Producto":
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verProductos()
              self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verProductos()
         elif texto == "Ver Proveedor":
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verProveedores()
              self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verProveedores()
         elif texto == "Ver Venta":
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos).verVentas()
              self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verVentas()
 
         elif texto == "Ingresar Compra":
@@ -94,4 +100,5 @@ class Controlador_vista ():
             
 if __name__ == "__main__":
     app=Controlador_vista()
-    app.ventana.mainloop()
+
+        

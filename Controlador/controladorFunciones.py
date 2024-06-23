@@ -28,19 +28,7 @@ class ControladorFunciones:
                 messagebox.showinfo(title= None, message="No se encontraron registros")
                 print("No se encontraron registros")
 
-    def insertar_datos(tabla, campos, valores):
-        campos_str = ", ".join(campos)
-        placeholders = ", ".join(["%s"] * len(valores))
-        query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
 
-        resultado = conexion.ejecutar_comando(query, valores)
-        
-        if resultado:
-            messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
-            print(f"Datos insertados correctamente en la tabla {tabla}.")
-        else:
-            messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
-            print(f"Error al insertar datos en la tabla {tabla}.")
 
     def buscarElemento(self,tabla,entry):
         resultados = []
@@ -63,6 +51,18 @@ class ControladorFunciones:
             tabla.delete(*tabla.get_children())
             self.cargarDatos(tabla,query)
 
+    def seleccionar_datos(self, event):
+        try:
+            item = self.tabla.selection()
+            values = self.tabla.item(item)['values']
+            
+            self.entry_id.insert(0, values[0])
+            self.entry_editorial.insert(0, values[1])
+        except:
+                titulo = 'Edicion de datos'
+                mensaje = 'No ha seleccionado ningun registro'
+                messagebox.showerror(titulo, mensaje)
+                
     def eliminar_elemento(self,tabla):
         itemseleccionado = tabla.focus()
         datos = tabla.item(itemseleccionado).get('values')[1]
