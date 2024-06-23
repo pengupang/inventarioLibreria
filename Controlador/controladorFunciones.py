@@ -28,14 +28,6 @@ class ControladorFunciones:
                 messagebox.showinfo(title= None, message="No se encontraron registros")
                 print("No se encontraron registros")
 
-    def guardar_datos(self, titulo_value, stock_value):
-
-        sql = "INSERT INTO libro (Titulo, Stock) VALUES (%s, %s)"
-        val = (titulo_value, stock_value)
-        print(val)
-        # Ejecutar la consulta SQL
-        conexion.ejecutar_comando(sql, val)
-
 
 
     def buscarElemento(self,tabla,entry):
@@ -59,4 +51,14 @@ class ControladorFunciones:
             tabla.delete(*tabla.get_children())
             self.cargarDatos(tabla,query)
 
-        
+    def seleccionar_datos(self, event):
+        try:
+            item = self.tabla.selection()
+            values = self.tabla.item(item)['values']
+            
+            self.entry_id.insert(0, values[0])
+            self.entry_editorial.insert(0, values[1])
+        except:
+                titulo = 'Edicion de datos'
+                mensaje = 'No ha seleccionado ningun registro'
+                messagebox.showerror(titulo, mensaje)
