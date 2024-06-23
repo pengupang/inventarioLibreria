@@ -5,6 +5,7 @@ from Vista.Ingresar_view import IngresarFrames
 from Vista.menúPrincipal import VentanaPrincipal
 from Vista.login_view import LoginView
 from Vista.Ver_view import VerFrames
+from Vista.Eliminar_view import EliminarFrames
 from Vista.toolBar import ToolBar
 
 
@@ -77,6 +78,17 @@ class Controlador_vista ():
              self.frame_actual=EditarFrames.EditarProductos(self.ventana)
         elif texto == "Editar Proveedor":
              self.frame_actual=EditarFrames.EditarProveedores(self.ventana)
+
+        elif texto == "Eliminar Compra":
+            self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarCompras()
+        elif texto == "Eliminar Editorial":
+             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarEditoriales()
+        elif texto == "Eliminar Producto":
+             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarProductos()
+        elif texto == "Eliminar Proveedor":
+             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarProveedores()
+        elif texto == "Eliminar Venta":
+             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarVentas()
 
 
             

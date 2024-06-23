@@ -25,6 +25,7 @@ class ToolBar(Frame):
         menu_productos.add_command(label="Ingresar Producto", command= lambda: self.enviar_señal("Ingresar Producto"))
         menu_productos.add_command(label="Editar Producto", command= lambda: self.enviar_señal("Editar Producto"))
         menu_productos.add_command(label="Ver Productos",command= lambda: self.enviar_señal("Ver Producto"))
+        menu_productos.add_command(label="Eliminar Productos",command= lambda: self.enviar_señal("Eliminar Producto"))
     
         
 
@@ -41,6 +42,7 @@ class ToolBar(Frame):
         menu_editoriales.add_command(label="Ingresar Editorial", command=lambda: self.enviar_señal("Ingresar Editorial"))
         menu_editoriales.add_command(label="Editar Editorial", command=lambda: self.enviar_señal("Editar Editorial"))
         menu_editoriales.add_command(label="Ver Editoriales" , command=lambda: self.enviar_señal("Ver Editorial"))
+        menu_editoriales.add_command(label="Eliminar Editoriales" , command=lambda: self.enviar_señal("Eliminar Editorial"))
         
 
         #crea el btn Proveedores
@@ -56,6 +58,7 @@ class ToolBar(Frame):
         menu_proveedores.add_command(label="Ingresar Proveedor", command=lambda: self.enviar_señal("Ingresar Proveedor"))
         menu_proveedores.add_command(label="Editar Proveedor", command=lambda: self.enviar_señal("Editar Proveedor"))
         menu_proveedores.add_command(label="Ver Proveedores", command=lambda: self.enviar_señal("Ver Proveedor"))
+        menu_proveedores.add_command(label="Eliminar Proveedores", command=lambda: self.enviar_señal("Eliminar Proveedor"))
 
 
         #crea el btn Ventas
@@ -70,6 +73,7 @@ class ToolBar(Frame):
         menu_ventas = tk.Menu(ventas,tearoff=0)
         menu_ventas.add_command(label="Ingresar Venta", command=lambda: self.enviar_señal("Ingresar Venta"))
         menu_ventas.add_command(label="Ver Ventas", command=lambda: self.enviar_señal("Ver Venta"))
+        menu_ventas.add_command(label="Eliminar Ventas",command=lambda: self.enviar_señal("Eliminar Venta"))
 
 
         #crea el btn Compras
@@ -85,6 +89,7 @@ class ToolBar(Frame):
         menu_compras.add_command(label="Ingresar Compra", command=lambda: self.enviar_señal("Ingresar Compra"))
         menu_compras.add_command(label="Editar Compra", command=lambda: self.enviar_señal("Editar Compra"))
         menu_compras.add_command(label="Ver Compras",command=lambda: self.enviar_señal("Ver Compra"))
+        menu_compras.add_command(label="Eliminar Compras",command=lambda: self.enviar_señal("Eliminar Compra"))
         
         #acomoda los btns de la toolbar
         productos.config(menu=menu_productos)

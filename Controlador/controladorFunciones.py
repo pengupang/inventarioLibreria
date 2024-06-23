@@ -63,4 +63,12 @@ class ControladorFunciones:
             tabla.delete(*tabla.get_children())
             self.cargarDatos(tabla,query)
 
-        
+    def eliminar_elemento(self,tabla):
+        itemseleccionado = tabla.focus()
+        datos = tabla.item(itemseleccionado).get('values')[1]
+        if messagebox.askyesno("¿Deseas eliminar?","¿Deseas eliminar el elemento \"{}?\"".format(datos)):
+            # aqui se eliminar el elemento de la base de datos
+            tabla.delete(itemseleccionado)
+            messagebox.showinfo("Eliminado","El elemento fue eliminado")
+        else:
+            pass
