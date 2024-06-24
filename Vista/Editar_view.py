@@ -3,7 +3,6 @@ from tkinter import ttk
 import tkinter as tk
 from tkinter import messagebox
 from Controlador.controladorFunciones import ControladorFunciones
-from Modelo.conexion import editar
 # En esta clase se cargan los frames de cada boton dedicados solamente a la edición de datos de la BD
 class EditarFrames():
     def __init__(self,master, callback) -> None:
@@ -71,6 +70,7 @@ class EditarFrames():
         self.tabla.heading("Cantidad Comprada", text="Cantidad Comprada")
         self.tabla.heading("Total Compra", text="Total Compra")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
+        self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
 
         self.callback(tabla, query)
 
@@ -90,7 +90,7 @@ class EditarFrames():
         label_editorial.place(x=50, y=80)
         self.entry_editorial.place(x=180, y=80)
            
-        self.btn_editar = CTkButton(self.master, text="Editar", command=editar)
+        self.btn_editar = CTkButton(self.master, text="Editar", command=None)
         self.btn_editar.place(x=150, y=110)
 
         self.tabla['columns'] = ("1", "2")
@@ -98,8 +98,8 @@ class EditarFrames():
         self.tabla.heading("1", text="ID")
         self.tabla.heading("2", text="Nombre")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
-
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
+
         
         self.callback(self.tabla, query)
 
@@ -139,6 +139,8 @@ class EditarFrames():
         self.tabla.heading("Autor", text="Autor")
         self.tabla.heading("Stock", text="Stock")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
+        self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
+
 
     def EditarProveedores(self):
         label_id = CTkLabel(self.master, text="ID:")
@@ -162,6 +164,7 @@ class EditarFrames():
         self.tabla.heading("ID", text="ID")
         self.tabla.heading("Editorial", text="Nombre")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
+        self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
 
 
     
