@@ -54,7 +54,7 @@ class EditarFrames():
         # Crear tabla
         self.tabla = ttk.Treeview(self.master)
         self.tabla['columns'] = ("ID", "Titulo Libro", "Fecha", "Cantidad Comprada", "Total Compra")
-
+    
         #acomoda las columnas de la tabla
         self.tabla.column("#0", width=0)
         self.tabla.column("ID",width=20)
@@ -130,6 +130,10 @@ class EditarFrames():
         self.btn_editar = CTkButton(self.master, text="Editar", command=None)
         self.btn_editar.place(x=150, y=200)
         
+        query = """SELECT libro.ID, Titulo, Autor.nombre, Stock 
+                   FROM libro 
+                   INNER JOIN autor_libro ON libro.ID = autor_libro.ID_Libro 
+                   INNER JOIN autor ON autor.ID = autor_libro.ID_Autor"""
         # Crear tabla
         self.tabla = ttk.Treeview(self.master)
         self.tabla['columns'] = ("ID", "Titulo", "Autor", "Stock")
@@ -139,6 +143,7 @@ class EditarFrames():
         self.tabla.heading("Autor", text="Autor")
         self.tabla.heading("Stock", text="Stock")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
+        self.callback(self.tabla,query)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
 
 
@@ -157,7 +162,7 @@ class EditarFrames():
         
         self.btn_editar = CTkButton(self.master, text="Editar", command=None)
         self.btn_editar.place(x=150, y=110)
-
+        query = "SELECT * FROM  proveedor"
         self.tabla = ttk.Treeview(self.master)
         self.tabla['columns'] = ("ID", "Editorial")
         self.tabla.column("#0", width=0)
@@ -165,7 +170,7 @@ class EditarFrames():
         self.tabla.heading("Editorial", text="Nombre")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
-
+        self.callback(self.tabla,query)
 
     
     def seleccionar_datos(self, event):

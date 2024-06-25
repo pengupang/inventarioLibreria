@@ -52,16 +52,16 @@ class Controlador_vista ():
         self.mostrar_toolbar()
 
         if texto == "Ver Compra":
-            self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verCompras()
+            self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verCompras()
         elif texto == "Ver Editorial":
              
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verEditoriales()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verEditoriales()
         elif texto == "Ver Producto":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verProductos()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verProductos()
         elif texto == "Ver Proveedor":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verProveedores()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verProveedores()
         elif texto == "Ver Venta":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento).verVentas()
+             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verVentas()
 
         elif texto == "Ingresar Compra":
              self.frame_actual=IngresarFrames(self.ventana).IngresarCompras()
