@@ -1,13 +1,15 @@
 
 #imports de clases
 from Controlador.controladorFunciones import ControladorFunciones
-from Vista.Editar_view import EditarFrames
-from Vista.Ingresar_view import IngresarFrames
 from Vista.menúPrincipal import VentanaPrincipal
+from Vista.Libro_View import Libro
+from Vista.Editoriales_view import Editoriales
+from Vista.Movimiento_view import Movimiento
+from Vista.Autores_view import Autores
+from Vista.Proveedores_view import Proveedores
 from Vista.login_view import LoginView
-from Vista.Ver_view import VerFrames
-from Vista.Eliminar_view import EliminarFrames
 from Vista.toolBar import ToolBar
+
 
 
 #Controlador encargado de realizar los cambios de frames dentro de la ventana principal
@@ -45,53 +47,26 @@ class Controlador_vista ():
         self.toolbar.pack(fill="x")
     
     def cambiarFrame(self,texto):
-        for widget in self.ventana.winfo_children():
-            widget.destroy()
+          for widget in self.ventana.winfo_children():
+               widget.destroy()
 
- 
-        self.mostrar_toolbar()
+     
+          self.mostrar_toolbar()
 
-        if texto == "Ver Compra":
-            self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verCompras()
-        elif texto == "Ver Editorial":
-             
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verEditoriales()
-        elif texto == "Ver Producto":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verProductos()
-        elif texto == "Ver Proveedor":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verProveedores()
-        elif texto == "Ver Venta":
-             self.frame_actual=VerFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones._buscarElemento).verVentas()
+          if texto == "VistaProductos":
+               self.frame_actual=Libro(self.ventana)
 
-        elif texto == "Ingresar Compra":
-             self.frame_actual=IngresarFrames(self.ventana).IngresarCompras()
-        elif texto == "Ingresar Editorial":
-             self.frame_actual=IngresarFrames(self.ventana).IngresarEditorial()
-        elif texto == "Ingresar Producto":
-             self.frame_actual=IngresarFrames(self.ventana).IngresarProductos()
-        elif texto == "Ingresar Venta":
-             self.frame_actual=IngresarFrames(self.ventana).IngresarVentas()
+          elif texto == "VistaEditorial":
+               self.frame_actual=Editoriales(self.ventana)
 
-        elif texto == "Editar Compra":
-             self.frame_actual=EditarFrames(self.ventana,self.controlador_funciones.cargarDatos).EditarCompras()
-        elif texto == "Editar Editorial":
-             self.frame_actual=EditarFrames(self.ventana,self.controlador_funciones.cargarDatos).EditarEditoriales()
-        elif texto == "Editar Producto":
-             self.frame_actual=EditarFrames(self.ventana,self.controlador_funciones.cargarDatos).EditarProductos()
-        elif texto == "Editar Proveedor":
-             self.frame_actual=EditarFrames(self.ventana,self.controlador_funciones.cargarDatos).EditarProveedores()
+          elif texto == "VistaAutores":
+               self.frame_actual=Autores(self.ventana)
+          
+          elif texto == "VistaMovimientos":
+               self.frame_actual=Movimiento(self.ventana)
 
-        elif texto == "Eliminar Compra":
-            self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarCompras()
-        elif texto == "Eliminar Editorial":
-             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarEditoriales()
-        elif texto == "Eliminar Producto":
-             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarProductos()
-        elif texto == "Eliminar Proveedor":
-             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarProveedores()
-        elif texto == "Eliminar Venta":
-             self.frame_actual=EliminarFrames(self.ventana,self.controlador_funciones.cargarDatos,self.controlador_funciones.buscarElemento,self.controlador_funciones.eliminar_elemento).eliminarVentas()
-
+          elif texto == "VistaProveedores":
+               self.frame_actual=Proveedores(self.ventana)
 
             
 if __name__ == "__main__":

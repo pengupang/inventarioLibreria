@@ -72,3 +72,5 @@ class ControladorFunciones:
             messagebox.showinfo("Eliminado","El elemento fue eliminado")
         else:
             pass
+
+    
