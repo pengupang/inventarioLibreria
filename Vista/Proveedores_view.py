@@ -6,6 +6,7 @@ from Controlador.controladorFunciones import ControladorFunciones
 class Proveedores:
     def __init__(self, master):
         self.master = master
+        self.controladorFun = ControladorFunciones()
         
         # Frame principal para contenidos
         self.main_frame = CTkFrame(self.master)
@@ -59,7 +60,7 @@ class Proveedores:
         self.tabla.heading("Autor", text="Nombre")
         self.tabla.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
-        ControladorFunciones.cargarDatos(self, self.tabla, query)
+        self.controladorFun.cargarDatos(self.tabla, query)
 
     def IngresarProveedores(self):
         self.limpiar_main_frame()
@@ -87,7 +88,7 @@ class Proveedores:
         buscador = CTkEntry(self.main_frame)
         buscador.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
         
-        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.barraBusqueda(self.tabla, buscador, query))
+        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(self.tabla, buscador, query))
         boton_bus.grid(row=0, column=1, padx=10, pady=10, sticky="ew")
         
         tabla = ttk.Treeview(self.main_frame)
@@ -98,11 +99,11 @@ class Proveedores:
         tabla.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
         query = "SELECT * FROM proveedor;"
-        ControladorFunciones.cargarDatos(self, tabla, query)
+        self.controladorFun.cargarDatos(tabla, query)
     
     def seleccionar_datos(self, event):
         try:
-            item = self.tabla.selection()
+            item = self.tabla.focus()
             values = self.tabla.item(item)['values']
 
             self.entry_id.delete(0, tk.END)

@@ -6,6 +6,7 @@ from Controlador.controladorFunciones import ControladorFunciones
 class Libro:
     def __init__(self, master):
         self.master = master
+        self.controladorFun = ControladorFunciones()
         
         # Frame principal para contenidos
         self.main_frame = CTkFrame(self.master)
@@ -72,7 +73,7 @@ class Libro:
         self.tabla.heading("Stock", text="Stock")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
-        ControladorFunciones.cargarDatos(self, self.tabla, query)
+        self.controladorFun.cargarDatos(self.tabla, query)
 
     def IngresarLibro(self):
         self.limpiar_main_frame()
@@ -108,7 +109,7 @@ class Libro:
         # Se realiza un query especifico para la tabla de productos
         # esta debe mostrar titulo,autor,stock del libro
         query = "SELECT * FROM libro;"
-        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.barraBusqueda(tabla, buscador, query))
+        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(tabla, buscador, query))
         # crea columnas
         tabla['columns'] = ("1", "2", "3", "4")
         # cambia ancho de columna id
@@ -124,17 +125,18 @@ class Libro:
         boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
         tabla.pack(padx=10, pady=10, expand=True, fill=BOTH)
         
-        ControladorFunciones.cargarDatos(self, tabla, query)
+        self.controladorFun.cargarDatos(tabla, query)
     
     def seleccionar_datos(self, event):
         try:
-            item = self.tabla.selection()
+            item = self.tabla.focus()
             values = self.tabla.item(item)['values']
+            print(values)
 
             self.entry_id.delete(0, tk.END)
             self.entry_id.insert(0, values[0])
-            self.entry_autor.delete(0, tk.END)
-            self.entry_autor.insert(0, values[1])
+            self.entry_titulo.delete(0, tk.END)
+            self.entry_titulo.insert(0, values[1])
         except:
             titulo = 'Edición de datos'
             mensaje = 'No ha seleccionado ningún registro'
