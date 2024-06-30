@@ -1,0 +1,8 @@
+REQUISITOS:
+     -Windows Powershell
+     -SumatraPDF(https://www.sumatrapdfreader.org/download-free-pdf-viewer)
+
+CONFIGURACION PARA IMPRIMIR
+     -Se necesita configurar la impresera que se utilizara como Predeterminada
+     -Se necesita configurar como predeterminado sumatraPDF para que lea archivos .pdf
+

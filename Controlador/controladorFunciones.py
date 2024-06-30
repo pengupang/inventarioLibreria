@@ -3,6 +3,7 @@
 from tkinter import messagebox
 from Modelo import conexion
 from Modelo import listaImpresa
+from Modelo import impresora
 
 class ControladorFunciones:
 
@@ -85,7 +86,9 @@ class ControladorFunciones:
                         INNER JOIN editorial ON libro.ID_Editorial = editorial.ID;
                         """
                 ColumnasLibro = ["ID","Titulo","Autor","Editorial", "Stock"]
-                listaImpresa.generarPdf(tablaLibro,ColumnasLibro,'lista_de_libros')
+                nombre = 'lista_de_libros'
+                listaImpresa.generarPdf(tablaLibro,ColumnasLibro,nombre)
+                impresora.imprimirPDF(nombre)
             case 'compras':
                 tablaCompras= """
                         SELECT movimiento.ID, libro.Titulo, proveedor.Nombre AS Proveedor, 
@@ -95,7 +98,9 @@ class ControladorFunciones:
                         """
 
                 ColumnasCompras= ["ID","Titulo","Proveedor","Fecha","Cantidad", "Total neto"]
-                listaImpresa.generarPdf(tablaCompras,ColumnasCompras,'lista_de_compras')
+                nombre = 'lista_de_compras'
+                listaImpresa.generarPdf(tablaCompras,ColumnasCompras,nombre)
+                impresora.imprimirPDF(nombre)
             case 'ventas':
                 tablaVentas= """
                         SELECT movimiento.ID, libro.Titulo, Fecha, Cantidad, Total_neto FROM movimiento
@@ -104,6 +109,8 @@ class ControladorFunciones:
                         """
 
                 ColumnasVentas= ["ID","Titulo","Fecha","Cantidad", "Total neto"]
-                listaImpresa.generarPdf(tablaVentas,ColumnasVentas,'lista_de_ventas')
+                nombre = 'lista_de_ventas'
+                listaImpresa.generarPdf(tablaVentas,ColumnasVentas,nombre)
+                impresora.imprimirPDF(nombre)
             case _:
                 pass
