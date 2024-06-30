@@ -85,26 +85,25 @@ class ControladorFunciones:
                         INNER JOIN editorial ON libro.ID_Editorial = editorial.ID;
                         """
                 ColumnasLibro = ["ID","Titulo","Autor","Editorial", "Stock"]
-                print("se ejectuto _generarPdf")
-                listaImpresa.generarPdf(tablaLibro,ColumnasLibro)
+                listaImpresa.generarPdf(tablaLibro,ColumnasLibro,'lista_de_libros')
             case 'compras':
-                tablaCompras = """
-                        SELECT movimiento.ID, libro.Titulo, Fecha, Cantidad, Total_neto FROM movimiento
-                        INNER JOIN libro ON movimiento.ID_Libro = libro.ID
-                        WHERE movimiento.ID_Tipo_movimiento = 1;
-                        """
-                ColumnasCompras= ["ID","Titulo","Fecha","Cantidad", "Total neto"]
-                listaImpresa.generarPdf(tablaCompras,ColumnasCompras)
-            case 'ventas':
-                tablaVentas= """
+                tablaCompras= """
                         SELECT movimiento.ID, libro.Titulo, proveedor.Nombre AS Proveedor, 
                         Fecha, Cantidad, Total_neto FROM movimiento
                         INNER JOIN libro On movimiento.ID_Libro = libro.ID
                         INNER JOIN proveedor On movimiento.ID_Proveedor = proveedor.ID;
                         """
-                ColumnasVentas= ["ID","Titulo","Proveedor","Fecha","Cantidad", "Total neto"]
-                listaImpresa.generarPdf(tablaVentas,ColumnasVentas)
+
+                ColumnasCompras= ["ID","Titulo","Proveedor","Fecha","Cantidad", "Total neto"]
+                listaImpresa.generarPdf(tablaCompras,ColumnasCompras,'lista_de_compras')
+            case 'ventas':
+                tablaVentas= """
+                        SELECT movimiento.ID, libro.Titulo, Fecha, Cantidad, Total_neto FROM movimiento
+                        INNER JOIN libro ON movimiento.ID_Libro = libro.ID
+                        WHERE movimiento.ID_Tipo_movimiento = 1;
+                        """
+
+                ColumnasVentas= ["ID","Titulo","Fecha","Cantidad", "Total neto"]
+                listaImpresa.generarPdf(tablaVentas,ColumnasVentas,'lista_de_ventas')
             case _:
                 pass
-
-    

@@ -4,17 +4,14 @@ from reportlab.platypus import Table, TableStyle, SimpleDocTemplate
 import os
 from Modelo.conexion import ejecutar_consulta
 
-def generarPdf(query,columnas):
+def generarPdf(query,columnas,nombre):
     rows = ejecutar_consulta(query)
     data = []; data.append(columnas)
     for row in rows:
         data.append(row)
 
     elementos = []
-
-    directorio = os.path.abspath(os.path.join(os.getcwd(),"pdfs/test.pdf"))
-    print(directorio)
-    
+    directorio = os.path.abspath(os.path.join(os.getcwd(),"pdfs/{}.pdf".format(nombre)))
     doc = SimpleDocTemplate(directorio)
     lista = Table(data)
     lista.setStyle(TableStyle([
@@ -24,4 +21,3 @@ def generarPdf(query,columnas):
 
     elementos.append(lista)
     doc.build(elementos)
-
