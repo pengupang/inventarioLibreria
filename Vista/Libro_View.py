@@ -7,7 +7,11 @@ class Libro:
     def __init__(self, master):
         self.master = master
         self.controladorFun = ControladorFunciones()
-        
+        self.query="""
+            SELECT libro.ID, Titulo, autor.Nombre, stock FROM libro
+            INNER JOIN autor ON libro.ID_Autor = autor.ID;
+            """
+       
         # Frame principal para contenidos
         self.main_frame = CTkFrame(self.master)
         self.main_frame.pack(side=RIGHT,fill=BOTH, expand=True)
@@ -62,7 +66,6 @@ class Libro:
         self.btn_editar = CTkButton(self.main_frame, text="Editar", command=None)
         self.btn_editar.place(x=150, y=200)
         
-        query = "SELECT * FROM libro;"
         # Crear tabla
         self.tabla = ttk.Treeview(self.main_frame)
         self.tabla['columns'] = ("ID", "Titulo", "Autor", "Stock")
@@ -73,7 +76,7 @@ class Libro:
         self.tabla.heading("Stock", text="Stock")
         self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
-        self.controladorFun.cargarDatos(self.tabla, query)
+        self.controladorFun.cargarDatos(self.tabla, self.query)
 
     def IngresarLibro(self):
         self.limpiar_main_frame()
@@ -108,8 +111,7 @@ class Libro:
         tabla = ttk.Treeview(self.main_frame)
         # Se realiza un query especifico para la tabla de productos
         # esta debe mostrar titulo,autor,stock del libro
-        query = "SELECT * FROM libro;"
-        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(tabla, buscador, query))
+        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(tabla, buscador, self.query))
         # crea columnas
         tabla['columns'] = ("1", "2", "3", "4")
         # cambia ancho de columna id
@@ -121,11 +123,15 @@ class Libro:
         tabla.heading("3", text="Autor")
         tabla.heading("4", text="Stock")
 
+        #todavia no imprime :(
+        botonListar = CTkButton(self.main_frame, text="Imprimir", command=lambda: self.controladorFun._generarPdf('libros'))
+
         buscador.pack(padx=10, pady=5, side=TOP, fill=X)
         boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
         tabla.pack(padx=10, pady=10, expand=True, fill=BOTH)
+        botonListar.pack(padx=10, pady=10, side=RIGHT, fill=BOTH)
         
-        self.controladorFun.cargarDatos(tabla, query)
+        self.controladorFun.cargarDatos(tabla, self.query)
     
     def seleccionar_datos(self, event):
         try:

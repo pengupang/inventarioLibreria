@@ -2,6 +2,8 @@
 # y realizar un retorno de datos 
 from tkinter import messagebox
 from Modelo import conexion
+from Modelo import listaImpresa
+
 class ControladorFunciones:
 
     #Valida los datos ingresados en login con los almacenados en la base de datos
@@ -72,5 +74,37 @@ class ControladorFunciones:
             messagebox.showinfo("Eliminado","El elemento fue eliminado")
         else:
             pass
+
+    # solo genera pdfs y los guarda en otra carpeta
+    def _generarPdf(self,opc):
+        match opc:
+            case 'libros':
+                tablaLibro ="""
+                        SELECT libro.ID, Titulo, autor.Nombre, editorial.Nombre, stock FROM libro
+                        INNER JOIN autor ON libro.ID_Autor = autor.ID
+                        INNER JOIN editorial ON libro.ID_Editorial = editorial.ID;
+                        """
+                ColumnasLibro = ["ID","Titulo","Autor","Editorial", "Stock"]
+                print("se ejectuto _generarPdf")
+                listaImpresa.generarPdf(tablaLibro,ColumnasLibro)
+            case 'compras':
+                tablaCompras = """
+                        SELECT movimiento.ID, libro.Titulo, Fecha, Cantidad, Total_neto FROM movimiento
+                        INNER JOIN libro ON movimiento.ID_Libro = libro.ID
+                        WHERE movimiento.ID_Tipo_movimiento = 1;
+                        """
+                ColumnasCompras= ["ID","Titulo","Fecha","Cantidad", "Total neto"]
+                listaImpresa.generarPdf(tablaCompras,ColumnasCompras)
+            case 'ventas':
+                tablaVentas= """
+                        SELECT movimiento.ID, libro.Titulo, proveedor.Nombre AS Proveedor, 
+                        Fecha, Cantidad, Total_neto FROM movimiento
+                        INNER JOIN libro On movimiento.ID_Libro = libro.ID
+                        INNER JOIN proveedor On movimiento.ID_Proveedor = proveedor.ID;
+                        """
+                ColumnasVentas= ["ID","Titulo","Proveedor","Fecha","Cantidad", "Total neto"]
+                listaImpresa.generarPdf(tablaVentas,ColumnasVentas)
+            case _:
+                pass
 
     
