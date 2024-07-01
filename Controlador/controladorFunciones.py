@@ -28,6 +28,12 @@ class ControladorFunciones:
                 messagebox.showinfo(title= None, message="No se encontraron registros")
                 print("No se encontraron registros")
 
+    
+         
+              
+              
+
+
 
 
     def buscarElemento(self,tabla,entry):
@@ -62,15 +68,43 @@ class ControladorFunciones:
                 titulo = 'Edicion de datos'
                 mensaje = 'No ha seleccionado ningun registro'
                 messagebox.showerror(titulo, mensaje)
-                
-    def eliminar_elemento(self,tabla):
-        itemseleccionado = tabla.focus()
-        datos = tabla.item(itemseleccionado).get('values')[1]
-        if messagebox.askyesno("¿Deseas eliminar?","¿Deseas eliminar el elemento \"{}?\"".format(datos)):
-            # aqui se eliminar el elemento de la base de datos
-            tabla.delete(itemseleccionado)
-            messagebox.showinfo("Eliminado","El elemento fue eliminado")
-        else:
-            pass
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def insertar_datos(tabla, campos, valores):
+        campos_str = ", ".join(campos)
+        placeholders = ", ".join(["%s"] * len(valores))
+        query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
+
+        resultado = conexion.ejecutar_comando(query, valores)
+        
+        if resultado:
+            messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
+            print(f"Datos insertados correctamente en la tabla {tabla}.")
+        else:
+            messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
+            print(f"Error al insertar datos en la tabla {tabla}.")

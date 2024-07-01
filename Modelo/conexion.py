@@ -42,3 +42,21 @@ def ejecutar_consulta(query, params=None):
     finally:
         cursor.close()
         conn.close()
+
+def obtenerAutor():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT ID FROM autor")
+    resultados = cursor.fetchall()
+    conn.close()
+
+    return [m[0] for m in resultados]
+
+def obtenerEditorial():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT ID FROM editorial")
+    resultados = cursor.fetchall()
+    conn.close()
+
+    return [n[0] for n in resultados]
