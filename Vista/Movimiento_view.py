@@ -102,7 +102,7 @@ class Movimiento:
         
         boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(self.tabla, buscador, query))
         boton_bus.grid(row=0, column=1, padx=10, pady=10, sticky="ew")
-        
+
         tabla = ttk.Treeview(self.main_frame)
         tabla['columns'] = ("1", "2","3","4","5","6","7")
         tabla.column("#0", width=0, stretch=False)
@@ -115,12 +115,19 @@ class Movimiento:
         tabla.heading("7", text="Total Neto")
         tabla.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
+        botonLisCompra = CTkButton(self.main_frame, text="Imprimir Compras", command=lambda: self.controladorFun._generarPdf('compras'))
+        botonLisCompra.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+
+        botonLisCompra = CTkButton(self.main_frame, text="Imprimir Ventas", command=lambda: self.controladorFun._generarPdf('ventas'))
+        botonLisCompra.grid(row=3, column=0, padx=10, pady=10, sticky="w")
+
         query = """SELECT movimiento.ID, libro.Titulo, proveedor.Nombre, tipo_movimiento.Tipo, Fecha, Cantidad, Total_neto 
                     FROM movimiento 
                     INNER JOIN libro ON libro.ID = movimiento.ID_Libro 
                     INNER JOIN tipo_movimiento ON tipo_movimiento.ID = movimiento.ID_Tipo_movimiento
                     INNER JOIN proveedor ON proveedor.ID = movimiento.ID_Proveedor;
                     """
+        
         self.controladorFun.cargarDatos(tabla, query)
     
     def seleccionar_datos(self, event):

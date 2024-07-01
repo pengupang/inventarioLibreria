@@ -108,3 +108,6 @@ class ControladorFunciones:
         else:
             messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
             print(f"Error al insertar datos en la tabla {tabla}.")
+
+
+    
