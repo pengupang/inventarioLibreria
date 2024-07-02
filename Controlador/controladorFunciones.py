@@ -2,6 +2,9 @@
 # y realizar un retorno de datos 
 from tkinter import messagebox
 from Modelo import conexion
+from Modelo import listaImpresa
+from Modelo import impresora
+
 class ControladorFunciones:
 
     #Valida los datos ingresados en login con los almacenados en la base de datos
@@ -27,12 +30,6 @@ class ControladorFunciones:
         else:  #En caso de estar la tabla vacia en la BD muestra un alert de informacion
                 messagebox.showinfo(title= None, message="No se encontraron registros")
                 print("No se encontraron registros")
-
-    
-         
-              
-              
-
 
 
 
@@ -68,46 +65,52 @@ class ControladorFunciones:
                 titulo = 'Edicion de datos'
                 mensaje = 'No ha seleccionado ningun registro'
                 messagebox.showerror(titulo, mensaje)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    def insertar_datos(tabla, campos, valores):
-        campos_str = ", ".join(campos)
-        placeholders = ", ".join(["%s"] * len(valores))
-        query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
-
-        resultado = conexion.ejecutar_comando(query, valores)
-        
-        if resultado:
-            messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
-            print(f"Datos insertados correctamente en la tabla {tabla}.")
+                
+    def eliminar_elemento(self,tabla):
+        itemseleccionado = tabla.focus()
+        datos = tabla.item(itemseleccionado).get('values')[1]
+        if messagebox.askyesno("¿Deseas eliminar?","¿Deseas eliminar el elemento \"{}?\"".format(datos)):
+            # aqui se eliminar el elemento de la base de datos
+            tabla.delete(itemseleccionado)
+            messagebox.showinfo("Eliminado","El elemento fue eliminado")
         else:
-            messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
-            print(f"Error al insertar datos en la tabla {tabla}.")
+            pass
 
+    # solo genera pdfs y los guarda en otra carpeta
+    def _generarPdf(self,opc):
+        match opc:
+            case 'libros':
+                tablaLibro ="""
+                        SELECT libro.ID, Titulo, autor.Nombre, editorial.Nombre, stock FROM libro
+                        INNER JOIN autor ON libro.ID_Autor = autor.ID
+                        INNER JOIN editorial ON libro.ID_Editorial = editorial.ID;
+                        """
+                ColumnasLibro = ["ID","Titulo","Autor","Editorial", "Stock"]
+                nombre = 'lista_de_libros'
+                listaImpresa.generarPdf(tablaLibro,ColumnasLibro,nombre)
+                impresora.imprimirPDF(nombre)
+            case 'compras':
+                tablaCompras= """
+                        SELECT movimiento.ID, libro.Titulo, proveedor.Nombre AS Proveedor, 
+                        Fecha, Cantidad, Total_neto FROM movimiento
+                        INNER JOIN libro On movimiento.ID_Libro = libro.ID
+                        INNER JOIN proveedor On movimiento.ID_Proveedor = proveedor.ID;
+                        """
 
-    
+                ColumnasCompras= ["ID","Titulo","Proveedor","Fecha","Cantidad", "Total neto"]
+                nombre = 'lista_de_compras'
+                listaImpresa.generarPdf(tablaCompras,ColumnasCompras,nombre)
+                impresora.imprimirPDF(nombre)
+            case 'ventas':
+                tablaVentas= """
+                        SELECT movimiento.ID, libro.Titulo, Fecha, Cantidad, Total_neto FROM movimiento
+                        INNER JOIN libro ON movimiento.ID_Libro = libro.ID
+                        WHERE movimiento.ID_Tipo_movimiento = 1;
+                        """
+
+                ColumnasVentas= ["ID","Titulo","Fecha","Cantidad", "Total neto"]
+                nombre = 'lista_de_ventas'
+                listaImpresa.generarPdf(tablaVentas,ColumnasVentas,nombre)
+                impresora.imprimirPDF(nombre)
+            case _:
+                pass
