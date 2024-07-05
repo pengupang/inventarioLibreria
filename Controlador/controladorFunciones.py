@@ -93,7 +93,7 @@ class ControladorFunciones:
     # solo genera pdfs y los guarda en otra carpeta
     def _generarPdf(self,opc):
         match opc:
-            case 'libros':
+            case 'libro':
                 tablaLibro ="""
                         SELECT libro.ID, Titulo, autor.Nombre, editorial.Nombre, stock FROM libro
                         INNER JOIN autor ON libro.ID_Autor = autor.ID

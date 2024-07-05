@@ -111,8 +111,6 @@ class Libro:
         label_editorial.pack(pady=10, padx=10, fill=X)
         self.combo_editorial.pack(pady=10, padx=10, fill=X)
 
-
-        
         self.btn_ingresar = CTkButton(
             self.master,
             text="Insertar",
@@ -122,8 +120,23 @@ class Libro:
                 [self.entry_titulo.get(), self.entry_stock.get(),self.combo_autor.get(),self.combo_editorial.get()]
             )
         )
+        self.btn_ingresar.pack(padx=10, pady=10)
 
-        self.btn_ingresar.pack(padx=20, pady=200, fill=X)
+        def cancelarIngreso(entry_titulo,combo_autor,entry_stock,combo_editorial):
+            entry_titulo.delete(0, END)
+            combo_autor.set('')
+            entry_stock.delete(0, END)
+            combo_editorial.set('')
+
+        self.btn_cancelar = CTkButton(
+            self.master,
+            text="cancelar",
+            command=lambda: cancelarIngreso(self.entry_titulo,self.combo_autor,self.entry_stock,self.combo_editorial)
+        )
+        
+        self.btn_cancelar.pack(padx=10, pady=10)
+
+        
 
     def VerLibros(self):
         self.limpiar_main_frame()
@@ -146,7 +159,7 @@ class Libro:
         tabla.heading("5", text="Editorial")
 
         #todavia no imprime :(
-        botonListar = CTkButton(self.main_frame, text="Imprimir", command=lambda: self.controladorFun._generarPdf('libros'))
+        botonListar = CTkButton(self.main_frame, text="Imprimir", command=lambda: self.controladorFun._generarPdf('libro'))
 
         buscador.pack(padx=10, pady=5, side=TOP, fill=X)
         boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
@@ -177,3 +190,4 @@ class Libro:
             mensaje = 'No ha seleccionado ningún registro'
             messagebox.showerror(titulo, mensaje)
 
+            

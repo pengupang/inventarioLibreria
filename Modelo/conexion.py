@@ -1,4 +1,5 @@
 import mysql.connector
+from mysql.connector.fabric.connection import FabricMySQLSet
 
 def conectar():
    #Establece la conxion con la base de datos
@@ -60,3 +61,15 @@ def obtenerEditorial():
     conn.close()
 
     return [n[0] for n in resultados]
+
+def comprobarDuplicidad(nomtabla, palabra):
+    columna = ''
+    if nomtabla == 'libros':
+        columna = 'Titulo'
+    elif nomtabla == 'autores' | nomtabla == 'editorial' | nomtabla == 'proveedor':
+        columna = 'Nombre'
+    query = 'SELECT %s FROM %s WHERE LOWER(%s) = LOWER(%s);'
+    if ejecutar_comando(query, [columna,nomtabla,columna,palabra]):
+        return True
+    else:
+        return False
