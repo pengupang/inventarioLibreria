@@ -23,7 +23,7 @@ class LoginView (CTkFrame):
         self.lblContraseña = CTkLabel(self,text="Contraseña")
         self.lblContraseña.place(rely=0.55,relx=0.5,anchor=CENTER)
 
-        self.txtContraseña = CTkEntry(self)
+        self.txtContraseña = CTkEntry(self,show="*")
         self.txtContraseña.place(rely=0.6,relx=0.5,anchor=CENTER)
 
         btnEntrar = CTkButton(self,text="Ingresar")

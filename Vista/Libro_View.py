@@ -117,7 +117,10 @@ class Libro:
             command=lambda:ControladorFunciones.insertar_datos(
                 "libro",
                 ["Titulo","Stock","ID_autor","ID_editorial"],
-                [self.entry_titulo.get(), self.entry_stock.get(),self.combo_autor.get(),self.combo_editorial.get()]
+                [self.entry_titulo.get(),
+                 self.entry_stock.get(),
+                 self.controladorFun.obtenerID('autor',self.combo_autor.get()),
+                 self.controladorFun.obtenerID('editorial',self.combo_editorial.get()),]
             )
         )
         self.btn_ingresar.pack(padx=10, pady=10)

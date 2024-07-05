@@ -128,3 +128,23 @@ class ControladorFunciones:
                 impresora.imprimirPDF(nombre)
             case _:
                 pass
+    
+    def obtenerID(self,tabla,busca):
+        if tabla != "":
+            query = ''
+            if tabla == 'libro':
+                query = "SELECT ID, Titulo FROM libro WHERE Titulo=%s;"
+            elif tabla == 'autor':
+                query = "SELECT ID, Nombre FROM autor WHERE Nombre=%s;"
+            elif tabla == 'editorial':
+                query = "SELECT ID, Nombre FROM editorial WHERE Nombre=%s;"
+            else:
+                return "ERROR"
+            registro = conexion.ejecutar_consulta(query,[busca,])
+            if registro:
+                print(registro[0][0])
+                return registro[0][0]
+            else:
+                return "ERROR"
+        else:
+            return "ERROR"

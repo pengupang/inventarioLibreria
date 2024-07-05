@@ -47,20 +47,20 @@ def ejecutar_consulta(query, params=None):
 def obtenerAutor():
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute("SELECT ID FROM autor")
+    cursor.execute("SELECT * FROM autor")
     resultados = cursor.fetchall()
     conn.close()
 
-    return [m[0] for m in resultados]
+    return [m[1] for m in resultados]
 
 def obtenerEditorial():
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute("SELECT ID FROM editorial")
+    cursor.execute("SELECT * FROM editorial")
     resultados = cursor.fetchall()
     conn.close()
 
-    return [n[0] for n in resultados]
+    return [n[1] for n in resultados]
 
 def comprobarDuplicidad(nomtabla, palabra):
     columna = ''
