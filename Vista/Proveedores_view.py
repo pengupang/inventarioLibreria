@@ -2,6 +2,7 @@ from customtkinter import *
 from tkinter import ttk, messagebox
 import tkinter as tk
 from Controlador.controladorFunciones import ControladorFunciones
+from PIL import Image
 
 class Proveedores:
     def __init__(self, master):
@@ -15,7 +16,10 @@ class Proveedores:
         # Frame para la botonera
         self.botonera_frame = CTkFrame(self.master)
         self.botonera_frame.pack(side=LEFT, fill=Y)
-
+        my_image = CTkImage(light_image=Image.open("Vista/img/libreria.png"),                          
+                            size=(160,160))
+        CTkLabel(self.main_frame, image=my_image, text="").place(relx=0.5, rely=0.5, anchor=CENTER)
+        
         self.Botonera_place()
     
     def Botonera_place(self):

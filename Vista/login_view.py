@@ -1,4 +1,6 @@
 from customtkinter import *
+from PIL import Image
+
 
 # En esta clase se carga Exclusivamente el frame de login 
 #Ademas se envian datos desde los cuadros de texto a la determinada funcion que 
@@ -11,6 +13,10 @@ class LoginView (CTkFrame):
         
     
     def mostrar_Login(self):
+        my_image = CTkImage(light_image=Image.open("Vista/img/acceso.png"),
+                                  size=(120,120))
+        CTkLabel(self, image=my_image, text="").place(relx=0.5, rely=0.28, anchor=CENTER)
+
         self.configure(width=700,height=600)
         self.pack_propagate(False)
 
