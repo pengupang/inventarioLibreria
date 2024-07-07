@@ -55,18 +55,22 @@ class ControladorFunciones:
             self.cargarDatos(tabla,query)
 
     def insertar_datos(tabla, campos, valores):
-        campos_str = ", ".join(campos)
-        placeholders = ", ".join(["%s"] * len(valores))
-        query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
+        if conexion.comprobarDuplicidad(tabla,valores[0]) != True:
+            campos_str = ", ".join(campos)
+            placeholders = ", ".join(["%s"] * len(valores))
+            query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
 
-        resultado = conexion.ejecutar_comando(query, valores)
+            resultado = conexion.ejecutar_comando(query, valores)
 
-        if resultado:
-            messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
-            print(f"Datos insertados correctamente en la tabla {tabla}.")
+            if resultado:
+                messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
+                print(f"Datos insertados correctamente en la tabla {tabla}.")
+            else:
+                messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
+                print(f"Error al insertar datos en la tabla {tabla}.")
         else:
-            messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
-            print(f"Error al insertar datos en la tabla {tabla}.")
+            messagebox.showerror("ERROR", "el registro {} ya existe.".format(valores[0]))
+        
 
     def seleccionar_datos(self, event):
         try:

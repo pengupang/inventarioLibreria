@@ -64,12 +64,14 @@ def obtenerEditorial():
 
 def comprobarDuplicidad(nomtabla, palabra):
     columna = ''
-    if nomtabla == 'libros':
+    if nomtabla == 'libro':
         columna = 'Titulo'
-    elif nomtabla == 'autores' | nomtabla == 'editorial' | nomtabla == 'proveedor':
+    elif nomtabla == 'autores' or nomtabla == 'editorial' or nomtabla == 'proveedor':
         columna = 'Nombre'
-    query = 'SELECT %s FROM %s WHERE LOWER(%s) = LOWER(%s);'
-    if ejecutar_comando(query, [columna,nomtabla,columna,palabra]):
+    query = "SELECT {} FROM {} WHERE LOWER({}) = LOWER(\"{}\")".format(columna,nomtabla,columna,palabra)
+    print(query)
+    resultado = ejecutar_consulta(query)
+    if resultado:
         return True
     else:
         return False

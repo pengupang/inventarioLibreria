@@ -97,8 +97,7 @@ class Libro:
         label_autor = CTkLabel(self.main_frame, text="Autor:")
         label_stock = CTkLabel(self.main_frame, text="Stock:")
         label_editorial = CTkLabel(self.main_frame, text="Editorial:")
-    
-        
+
         self.entry_titulo = CTkEntry(self.main_frame)
         self.combo_autor = ttk.Combobox(self.main_frame, state="readonly", values=obtenerAutor())
         self.entry_stock = CTkEntry(self.main_frame)
