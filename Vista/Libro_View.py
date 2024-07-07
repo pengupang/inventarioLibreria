@@ -168,7 +168,16 @@ class Libro:
         tabla = ttk.Treeview(self.main_frame)
         # Se realiza un query especifico para la tabla de productos
         # esta debe mostrar titulo,autor,stock del libro
-        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(tabla, buscador, self.query))
+
+        botonListar = CTkButton(self.main_frame, text="Imprimir", 
+                                command=lambda: self.controladorFun._generarPdf('libro'))
+
+        botonEliminar = CTkButton(self.main_frame, text="Eliminar",
+                                command=lambda: self.controladorFun.eliminar_elemento(tabla,"libro"))
+
+        boton_bus = CTkButton(self.main_frame, text="Buscar", 
+                            command=lambda: self.controladorFun._buscarElemento(tabla, buscador, self.query))
+
         # crea columnas
         tabla['columns'] = ("1", "2", "3", "4", "5")
         # cambia ancho de columna id
@@ -184,13 +193,11 @@ class Libro:
         tabla.heading("4", text="Stock")
         tabla.heading("5", text="Editorial")
 
-        #todavia no imprime :(
-        botonListar = CTkButton(self.main_frame, text="Imprimir", command=lambda: self.controladorFun._generarPdf('libro'))
-
         buscador.pack(padx=10, pady=5, side=TOP, fill=X)
         boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
         tabla.pack(padx=10, pady=10, expand=True, fill=BOTH)
         botonListar.pack(padx=10, pady=10, side=RIGHT, fill=BOTH)
+        botonEliminar.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
         
         self.controladorFun.cargarDatos(tabla, self.query)
     

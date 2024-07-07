@@ -110,11 +110,14 @@ class ControladorFunciones:
                 mensaje = 'No ha seleccionado ningun registro'
                 messagebox.showerror(titulo, mensaje)
                 
-    def eliminar_elemento(self,tabla):
+    def eliminar_elemento(self,tabla, nombreTabla):
         itemseleccionado = tabla.focus()
-        datos = tabla.item(itemseleccionado).get('values')[1]
-        if messagebox.askyesno("¿Deseas eliminar?","¿Deseas eliminar el elemento \"{}?\"".format(datos)):
+        datos = tabla.item(itemseleccionado).get('values')
+        print(datos)
+        if messagebox.askyesno("¿Deseas eliminar?","¿Deseas eliminar el elemento \"{}?\"".format(datos[1])):
             # aqui se eliminar el elemento de la base de datos
+            query = "DELETE FROM {} WHERE ID = {};".format(nombreTabla,datos[0])
+            conexion.ejecutar_comando(query)
             tabla.delete(itemseleccionado)
             messagebox.showinfo("Eliminado","El elemento fue eliminado")
         else:

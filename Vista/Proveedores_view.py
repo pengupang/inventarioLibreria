@@ -102,6 +102,10 @@ class Proveedores:
         tabla.heading("2", text="Nombre")
         tabla.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
+        botonEliminar = CTkButton(self.main_frame, text="Eliminar",
+                                command=lambda: self.controladorFun.eliminar_elemento(tabla,"proveedor"))
+        botonEliminar.grid(row=2, column=0, padx=10, pady=10) 
+
         query = "SELECT * FROM proveedor;"
         self.controladorFun.cargarDatos(tabla, query)
     

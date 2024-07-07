@@ -66,7 +66,7 @@ def comprobarDuplicidad(nomtabla, palabra):
     columna = ''
     if nomtabla == 'libro':
         columna = 'Titulo'
-    elif nomtabla == 'autores' or nomtabla == 'editorial' or nomtabla == 'proveedor':
+    elif nomtabla == 'autor' or nomtabla == 'editorial' or nomtabla == 'proveedor':
         columna = 'Nombre'
     query = "SELECT {} FROM {} WHERE LOWER({}) = LOWER(\"{}\")".format(columna,nomtabla,columna,palabra)
     resultado = ejecutar_consulta(query)
@@ -74,4 +74,3 @@ def comprobarDuplicidad(nomtabla, palabra):
         return True
     else:
         return False
-
