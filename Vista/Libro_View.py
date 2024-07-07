@@ -134,7 +134,7 @@ class Libro:
         self.btn_ingresar = CTkButton(
             self.main_frame,
             text="Insertar",
-            command=lambda:ControladorFunciones.insertar_datos(
+            command=lambda:self.controladorFun.insertar_datos(
                 "libro",
                 ["Titulo","Stock","ID_autor","ID_editorial"],
                 [self.entry_titulo.get(),

@@ -41,18 +41,25 @@ class Movimiento:
         self.limpiar_main_frame()
 
         label_id = CTkLabel(self.main_frame, text="ID:")
-        label_proveedor = CTkLabel(self.main_frame, text="Proveedor:")
+        label_Movimiento= CTkLabel(self.main_frame, text="Proveedor:")
         
-        self.entry_id = CTkEntry(self.main_frame)
-        self.entry_proveedor = CTkEntry(self.main_frame)
+        self.entry_id = CTkEntry(self.main_frame, state=DISABLED)
+        self.entry_Movimiento= CTkEntry(self.main_frame)
         
         label_id.grid(row=0, column=0, padx=10, pady=10, sticky="e")
         self.entry_id.grid(row=0, column=1, padx=10, pady=10)
         
-        label_proveedor.grid(row=1, column=0, padx=10, pady=10, sticky="e")
-        self.entry_proveedor.grid(row=1, column=1, padx=10, pady=10)
+        label_Movimiento.grid(row=1, column=0, padx=10, pady=10, sticky="e")
+        self.entry_Movimiento.grid(row=1, column=1, padx=10, pady=10)
         
-        self.btn_editar = CTkButton(self.main_frame, text="Editar", command=None)
+        self.btn_editar = CTkButton(self.main_frame, text="Editar", 
+        command=lambda: self.controladorFun.editar_datos(
+            "movimiento",
+            ["Nombre"],
+            [self.entry_id.get(),
+            self.entry_Movimiento.get()]
+        ))
+
         self.btn_editar.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
         
         query = "SELECT * FROM autor"
@@ -87,7 +94,7 @@ class Movimiento:
         self.btn_ingresar = CTkButton(
             self.main_frame,
             text="Ingresar",
-            command=lambda:ControladorFunciones.insertar_datos(
+            command=lambda: self.controladorFun.insertar_datos(
                 "movimiento",
                 ["ID_Tipo_movimiento", "Fecha", "Total_neto"],
                 [self.entry_idtype.get(), self.entry_fecha.get(), self.entry_total.get()]
@@ -142,10 +149,12 @@ class Movimiento:
             item = self.tabla.focus()
             values = self.tabla.item(item)['values']
 
+            self.entry_id.configure(state=NORMAL)
             self.entry_id.delete(0, tk.END)
             self.entry_id.insert(0, values[0])
-            self.entry_proveedor.delete(0, tk.END)
-            self.entry_proveedor.insert(0, values[1])
+            self.entry_id.configure(state=DISABLED)
+            self.entry_Movimiento.delete(0, tk.END)
+            self.entry_Movimiento.insert(0, values[1])
         except:
             titulo = 'Edición de datos'
             mensaje = 'No ha seleccionado ningún registro'

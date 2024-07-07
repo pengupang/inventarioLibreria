@@ -43,7 +43,7 @@ class Autores:
         label_id = CTkLabel(self.main_frame, text="ID:")
         label_autor = CTkLabel(self.main_frame, text="Autor:")
         
-        self.entry_id = CTkEntry(self.main_frame)
+        self.entry_id = CTkEntry(self.main_frame,state=DISABLED)
         self.entry_autor = CTkEntry(self.main_frame)
         
         label_id.place(relx=0.3, y=50)
@@ -77,7 +77,7 @@ class Autores:
         self.btn_ingresar = CTkButton(
             self.main_frame,
             text="Ingresar",
-            command=lambda: ControladorFunciones.insertar_datos(
+            command=lambda: self.controladorFun.insertar_datos(
                 "autor",
                 ["Nombre"],
                 [self.entry_nombre.get()]
@@ -113,10 +113,13 @@ class Autores:
             item = self.tabla.focus()
             values = self.tabla.item(item)['values']
 
+            self.entry_id.configure(state=NORMAL)
             self.entry_id.delete(0, tk.END)
             self.entry_id.insert(0, values[0])
+            self.entry_id.configure(state=DISABLED)
             self.entry_autor.delete(0, tk.END)
             self.entry_autor.insert(0, values[1])
+            self.btn_editar.configure(state=NORMAL)
         except:
             titulo = 'Edición de datos'
             mensaje = 'No ha seleccionado ningún registro'
