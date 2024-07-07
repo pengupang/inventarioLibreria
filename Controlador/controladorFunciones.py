@@ -70,7 +70,30 @@ class ControladorFunciones:
                 print(f"Error al insertar datos en la tabla {tabla}.")
         else:
             messagebox.showerror("ERROR", "el registro {} ya existe.".format(valores[0]))
-        
+    
+    def editar_datos(self, tabla:str,campos, valores):
+        index = valores.pop(0)
+        comparacion = conexion.ejecutar_consulta("SELECT * FROM libro WHERE ID = 2;",())
+        print("comparacion: ",comparacion)
+        if conexion.comprobarDuplicidad(tabla,valores[0]) != True:
+            setters = []
+            for x, y in zip(campos, valores):
+                if isinstance(y, int):
+                    setters.append("{} = {}".format(x,y))
+                else:
+                    setters.append("{} = \'{}\'".format(x,y))
+            campos_str = ", ".join(setters)
+            query = f"UPDATE {tabla} SET {campos_str} WHERE ID = {index};"
+            print("query: ",query)
+            resultado = conexion.ejecutar_comando(query)
+            if resultado:
+                messagebox.showinfo(title="Exito",message=f"Datos editados correctamente en la tabla {tabla}")
+                print(f"Datos editados correctamente en la tabla {tabla}.")
+            else:
+                messagebox.showerror(title="Error",message=f"Error al editar datos en la tabla {tabla}.")
+                print(f"Error al editar datos en la tabla {tabla}.")
+        else:
+            messagebox.showerror("ERROR", "el registro {} ya existe.".format(valores[0]))
 
     def seleccionar_datos(self, event):
         try:
@@ -145,6 +168,26 @@ class ControladorFunciones:
             else:
                 return "ERROR"
             registro = conexion.ejecutar_consulta(query,[busca,])
+            if registro:
+                print(registro[0][0])
+                return registro[0][0]
+            else:
+                return "ERROR"
+        else:
+            return "ERROR"
+    
+    def obtenerNombre(self,tabla,id):
+        if tabla != "":
+            query = ''
+            if tabla == 'libro':
+                query = "SELECT Titulo FROM libro WHERE ID=%s;"
+            elif tabla == 'autor':
+                query = "SELECT Nombre FROM autor WHERE ID=%s;"
+            elif tabla == 'editorial':
+                query = "SELECT Nombre FROM editorial WHERE ID=%s;"
+            else:
+                return "ERROR"
+            registro = conexion.ejecutar_consulta(query,[id,])
             if registro:
                 print(registro[0][0])
                 return registro[0][0]

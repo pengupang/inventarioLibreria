@@ -12,7 +12,7 @@ def conectar():
     return conn
 
 #Ejecuta un comando SQL (INSERT, UPDATE, DELETE) y retorna True si se ejecutó correctamente.
-def ejecutar_comando(query, params):
+def ejecutar_comando(query, params=None):
    
     conn = conectar()
     cursor = conn.cursor()
@@ -69,9 +69,9 @@ def comprobarDuplicidad(nomtabla, palabra):
     elif nomtabla == 'autores' or nomtabla == 'editorial' or nomtabla == 'proveedor':
         columna = 'Nombre'
     query = "SELECT {} FROM {} WHERE LOWER({}) = LOWER(\"{}\")".format(columna,nomtabla,columna,palabra)
-    print(query)
     resultado = ejecutar_consulta(query)
     if resultado:
         return True
     else:
         return False
+

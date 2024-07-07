@@ -52,11 +52,13 @@ class Libro:
         label_stock = CTkLabel(self.main_frame, text="Stock:")
         label_editorial = CTkLabel(self.main_frame, text="Editorial:")
         
-        self.entry_id = CTkEntry(self.main_frame)
+        self.entry_id = CTkEntry(self.main_frame, state=DISABLED)
         self.entry_titulo = CTkEntry(self.main_frame)
-        self.entry_autor = CTkEntry(self.main_frame)
+        self.combo_autor = ttk.Combobox(self.main_frame, state="readonly", values=obtenerAutor())
+        #self.entry_autor = CTkEntry(self.main_frame)
         self.entry_stock = CTkEntry(self.main_frame)
-        self.entry_editorial = CTkEntry(self.main_frame)
+        self.combo_editorial = ttk.Combobox(self.main_frame, state="readonly", values=obtenerEditorial())
+        #self.entry_editorial = CTkEntry(self.main_frame)
 
         
         label_id.place(x=50, y=50)
@@ -66,28 +68,42 @@ class Libro:
         self.entry_titulo.place(x=180, y=80)
         
         label_autor.place(x=50, y=110)
-        self.entry_autor.place(x=180, y=110)
+        self.combo_autor.place(x=250, y=145)
         
         label_stock.place(x=50, y=140)
         self.entry_stock.place(x=180, y=140)
 
         label_editorial.place(x=50, y=170)
-        self.entry_editorial.place(x=180, y=170)
+        self.combo_editorial.place(x=250, y=215)
 
         
-        self.btn_editar = CTkButton(self.main_frame, text="Editar", command=None)
+        self.btn_editar = CTkButton(self.main_frame, text="Editar", state=DISABLED,
+        command=lambda: self.controladorFun.editar_datos(
+            "libro",
+            ["Titulo","Stock","ID_autor","ID_editorial"],
+            [self.entry_id.get(),
+             self.entry_titulo.get(),
+             int(self.entry_stock.get()),
+             self.controladorFun.obtenerID("autor",self.combo_autor.get()),
+             self.controladorFun.obtenerID("editorial",self.combo_editorial.get()),]
+            ))
         self.btn_editar.place(x=150, y=200)
         
         # Crear tabla
         self.tabla = ttk.Treeview(self.main_frame)
         self.tabla['columns'] = ("ID", "Titulo", "Autor", "Stock","Editorial")
-        self.tabla.column("#0", width=0)
+        self.tabla.column("#0", width=-1, stretch=False)
+        self.tabla.column("#1", width=30, stretch=False)
+        self.tabla.column("#2", width=300, stretch=False)
+        self.tabla.column("#3", width=200, stretch=False)
+        self.tabla.column("#4", width=50, stretch=False)
+        self.tabla.column("#5", width=70, stretch=False)
         self.tabla.heading("ID", text="ID")
         self.tabla.heading("Titulo", text="Titulo")
         self.tabla.heading("Autor", text="Autor")
         self.tabla.heading("Stock", text="Stock")
         self.tabla.heading("Editorial", text="Editorial")
-        self.tabla.place(relx=0.5, rely=0.6,anchor=CENTER)
+        self.tabla.place(relx=0.02, rely=0.6)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
         self.controladorFun.cargarDatos(self.tabla, self.query)
 
@@ -181,16 +197,17 @@ class Libro:
             values = self.tabla.item(item)['values']
             print(values)
 
+            self.entry_id.configure(state=NORMAL)
             self.entry_id.delete(0, tk.END)
             self.entry_id.insert(0, values[0])
+            self.entry_id.configure(state=DISABLED)
             self.entry_titulo.delete(0, tk.END)
             self.entry_titulo.insert(0, values[1])
-            self.entry_autor.delete(0, tk.END)
-            self.entry_autor.insert(0, values[2])
+            self.combo_autor.set(values[2])
             self.entry_stock.delete(0, tk.END)
             self.entry_stock.insert(0, values[3])
-            self.entry_editorial.delete(0, tk.END)
-            self.entry_editorial.insert(0, values[4])
+            self.combo_editorial.set(values[4])
+            self.btn_editar.configure(state=NORMAL)
 
         except:
             titulo = 'Edición de datos'
