@@ -55,22 +55,25 @@ class ControladorFunciones:
             self.cargarDatos(tabla,query)
 
     def insertar_datos(tabla, campos, valores):
-        if conexion.comprobarDuplicidad(tabla,valores[0]) != True:
-            campos_str = ", ".join(campos)
-            placeholders = ", ".join(["%s"] * len(valores))
-            query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
+        insertar = messagebox.askyesno(message=f"Está seguro que quiere ingresar los valores: {valores[0]} en la tabla: {tabla}")
+        if insertar:
+            if conexion.comprobarDuplicidad(tabla,valores[0]) != True:
+                campos_str = ", ".join(campos)
+                placeholders = ", ".join(["%s"] * len(valores))
+                query = f"INSERT INTO {tabla} ({campos_str}) VALUES ({placeholders});"
 
-            resultado = conexion.ejecutar_comando(query, valores)
+                resultado = conexion.ejecutar_comando(query, valores)
 
-            if resultado:
-                messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
-                print(f"Datos insertados correctamente en la tabla {tabla}.")
+                if resultado:
+                    messagebox.showinfo(title="Exito",message=f"Datos insertados correctamente en la tabla {tabla}")
+                    print(f"Datos insertados correctamente en la tabla {tabla}.")
+                else:
+                    messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
+                    print(f"Error al insertar datos en la tabla {tabla}.")
             else:
-                messagebox.showerror(title="Error",message=f"Error al insertar datos en la tabla {tabla}.")
-                print(f"Error al insertar datos en la tabla {tabla}.")
-        else:
-            messagebox.showerror("ERROR", "el registro {} ya existe.".format(valores[0]))
-    
+                messagebox.showerror("ERROR", "el registro {} ya existe.".format(valores[0]))
+        
+        
     def editar_datos(self, tabla:str,campos, valores):
         index = valores.pop(0)
         comparacion = conexion.ejecutar_consulta("SELECT * FROM libro WHERE ID = 2;",())
