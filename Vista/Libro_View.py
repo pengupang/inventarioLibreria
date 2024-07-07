@@ -116,7 +116,7 @@ class Libro:
         self.combo_editorial.pack(pady=10, padx=10, fill=X)
 
         self.btn_ingresar = CTkButton(
-            self.master,
+            self.main_frame,
             text="Insertar",
             command=lambda:ControladorFunciones.insertar_datos(
                 "libro",
@@ -136,7 +136,7 @@ class Libro:
             combo_editorial.set('')
 
         self.btn_cancelar = CTkButton(
-            self.master,
+            self.main_frame,
             text="cancelar",
             command=lambda: cancelarIngreso(self.entry_titulo,self.combo_autor,self.entry_stock,self.combo_editorial)
         )
