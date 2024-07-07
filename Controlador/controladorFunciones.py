@@ -54,7 +54,7 @@ class ControladorFunciones:
             tabla.delete(*tabla.get_children())
             self.cargarDatos(tabla,query)
 
-    def insertar_datos(tabla, campos, valores):
+    def insertar_datos(self, tabla, campos, valores):
         insertar = messagebox.askyesno(message=f"Está seguro que quiere ingresar los valores: {valores[0]} en la tabla: {tabla}")
         if insertar:
             if conexion.comprobarDuplicidad(tabla,valores[0]) != True:

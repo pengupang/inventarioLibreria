@@ -134,7 +134,7 @@ class Libro:
         self.btn_ingresar = CTkButton(
             self.main_frame,
             text="Insertar",
-            command=lambda:ControladorFunciones.insertar_datos(
+            command=lambda:self.controladorFun.insertar_datos(
                 "libro",
                 ["Titulo","Stock","ID_autor","ID_editorial"],
                 [self.entry_titulo.get(),
@@ -181,9 +181,9 @@ class Libro:
         # crea columnas
         tabla['columns'] = ("1", "2", "3", "4", "5")
         # cambia ancho de columna id
-        tabla.column("#0", width=0, stretch=False)
-        tabla.column("#1", width=35, stretch=False)
-        tabla.column("#2", width=300, stretch=False)
+        tabla.column("#0", width=-1, stretch=False)
+        tabla.column("#1", width=70, stretch=False)
+        tabla.column("#2", width=550, stretch=False)
         tabla.column("#3", width=130, stretch=False)
         tabla.column("#4", width=50, stretch=False)
         # agrega texto a los headings de las columnas

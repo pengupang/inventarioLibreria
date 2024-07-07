@@ -43,7 +43,7 @@ class Autores:
         label_id = CTkLabel(self.main_frame, text="ID:")
         label_autor = CTkLabel(self.main_frame, text="Autor:")
         
-        self.entry_id = CTkEntry(self.main_frame)
+        self.entry_id = CTkEntry(self.main_frame,state=DISABLED)
         self.entry_autor = CTkEntry(self.main_frame)
         
         label_id.grid(row=0, column=0, padx=10, pady=10, sticky="e")
@@ -52,7 +52,14 @@ class Autores:
         label_autor.grid(row=1, column=0, padx=10, pady=10, sticky="e")
         self.entry_autor.grid(row=1, column=1, padx=10, pady=10)
         
-        self.btn_editar = CTkButton(self.main_frame, text="Editar", command=None)
+        self.btn_editar = CTkButton(self.main_frame, text="Editar", state=DISABLED,
+        command=lambda: self.controladorFun.editar_datos(
+            "autor",
+            ["Nombre"],
+            [self.entry_id.get(),
+            self.entry_autor.get()]
+        ))
+
         self.btn_editar.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
         
         query = "SELECT * FROM autor"
@@ -77,7 +84,7 @@ class Autores:
         self.btn_ingresar = CTkButton(
             self.main_frame,
             text="Ingresar",
-            command=lambda: ControladorFunciones.insertar_datos(
+            command=lambda: self.controladorFun.insertar_datos(
                 "autor",
                 ["Nombre"],
                 [self.entry_nombre.get()]
@@ -113,10 +120,13 @@ class Autores:
             item = self.tabla.focus()
             values = self.tabla.item(item)['values']
 
+            self.entry_id.configure(state=NORMAL)
             self.entry_id.delete(0, tk.END)
             self.entry_id.insert(0, values[0])
+            self.entry_id.configure(state=DISABLED)
             self.entry_autor.delete(0, tk.END)
             self.entry_autor.insert(0, values[1])
+            self.btn_editar.configure(state=NORMAL)
         except:
             titulo = 'Edición de datos'
             mensaje = 'No ha seleccionado ningún registro'
