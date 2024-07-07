@@ -76,8 +76,6 @@ class ControladorFunciones:
         
     def editar_datos(self, tabla:str,campos, valores):
         index = valores.pop(0)
-        comparacion = conexion.ejecutar_consulta("SELECT * FROM libro WHERE ID = 2;",())
-        print("comparacion: ",comparacion)
         if conexion.comprobarDuplicidad(tabla,valores[0]) != True:
             setters = []
             for x, y in zip(campos, valores):
@@ -87,14 +85,16 @@ class ControladorFunciones:
                     setters.append("{} = \'{}\'".format(x,y))
             campos_str = ", ".join(setters)
             query = f"UPDATE {tabla} SET {campos_str} WHERE ID = {index};"
-            print("query: ",query)
-            resultado = conexion.ejecutar_comando(query)
-            if resultado:
-                messagebox.showinfo(title="Exito",message=f"Datos editados correctamente en la tabla {tabla}")
-                print(f"Datos editados correctamente en la tabla {tabla}.")
+            if messagebox.askokcancel("Un momento","¿Esta seguro que quiere editar este registro?"):
+                resultado = conexion.ejecutar_comando(query)
+                if resultado:
+                    messagebox.showinfo(title="Exito",message=f"Datos editados correctamente en la tabla {tabla}")
+                    print(f"Datos editados correctamente en la tabla {tabla}.")
+                else:
+                    messagebox.showerror(title="Error",message=f"Error al editar datos en la tabla {tabla}.")
+                    print(f"Error al editar datos en la tabla {tabla}.")
             else:
-                messagebox.showerror(title="Error",message=f"Error al editar datos en la tabla {tabla}.")
-                print(f"Error al editar datos en la tabla {tabla}.")
+                pass
         else:
             messagebox.showerror("ERROR", "el registro {} ya existe.".format(valores[0]))
 
