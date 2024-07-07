@@ -54,27 +54,27 @@ class Libro:
         
         self.entry_id = CTkEntry(self.main_frame, state=DISABLED)
         self.entry_titulo = CTkEntry(self.main_frame)
-        self.combo_autor = ttk.Combobox(self.main_frame, state="readonly", values=obtenerAutor())
+        self.combo_autor = CTkComboBox(self.main_frame, state="readonly", values=obtenerAutor())
         #self.entry_autor = CTkEntry(self.main_frame)
         self.entry_stock = CTkEntry(self.main_frame)
-        self.combo_editorial = ttk.Combobox(self.main_frame, state="readonly", values=obtenerEditorial())
+        self.combo_editorial = CTkComboBox(self.main_frame, state="readonly", values=obtenerEditorial())
         #self.entry_editorial = CTkEntry(self.main_frame)
 
         
-        label_id.place(x=50, y=50)
-        self.entry_id.place(x=180, y=50)
+        label_id.place(relx=0.3, y=50)
+        self.entry_id.place(relx=0.4, y=50)
         
-        label_titulo.place(x=50, y=80)
-        self.entry_titulo.place(x=180, y=80)
+        label_titulo.place(relx=0.3, y=80)
+        self.entry_titulo.place(relx=0.4, y=80)
         
-        label_autor.place(x=50, y=110)
-        self.combo_autor.place(x=250, y=145)
+        label_autor.place(relx=0.3, y=110)
+        self.combo_autor.place(relx=0.4, y=110)
         
-        label_stock.place(x=50, y=140)
-        self.entry_stock.place(x=180, y=140)
+        label_stock.place(relx=0.3, y=140)
+        self.entry_stock.place(relx=0.4, y=140)
 
-        label_editorial.place(x=50, y=170)
-        self.combo_editorial.place(x=250, y=215)
+        label_editorial.place(relx=0.3, y=170)
+        self.combo_editorial.place(relx=0.4, y=170)
 
         
         self.btn_editar = CTkButton(self.main_frame, text="Editar", state=DISABLED,
@@ -87,23 +87,23 @@ class Libro:
              self.controladorFun.obtenerID("autor",self.combo_autor.get()),
              self.controladorFun.obtenerID("editorial",self.combo_editorial.get()),]
             ))
-        self.btn_editar.place(x=150, y=200)
+        self.btn_editar.place(relx=0.4, y=200)
         
         # Crear tabla
         self.tabla = ttk.Treeview(self.main_frame)
         self.tabla['columns'] = ("ID", "Titulo", "Autor", "Stock","Editorial")
-        self.tabla.column("#0", width=-1, stretch=False)
-        self.tabla.column("#1", width=30, stretch=False)
-        self.tabla.column("#2", width=300, stretch=False)
-        self.tabla.column("#3", width=200, stretch=False)
-        self.tabla.column("#4", width=50, stretch=False)
-        self.tabla.column("#5", width=70, stretch=False)
+        self.tabla.column("#0", width=-1, stretch=True)
+        self.tabla.column("#1", width=30, stretch=True)
+        self.tabla.column("#2", width=300, stretch=True)
+        self.tabla.column("#3", width=200, stretch=True)
+        self.tabla.column("#4", width=50, stretch=True)
+        self.tabla.column("#5", width=70, stretch=True)
         self.tabla.heading("ID", text="ID")
         self.tabla.heading("Titulo", text="Titulo")
         self.tabla.heading("Autor", text="Autor")
         self.tabla.heading("Stock", text="Stock")
         self.tabla.heading("Editorial", text="Editorial")
-        self.tabla.place(relx=0.02, rely=0.6)
+        self.tabla.place(relx=0.02, rely=0.5, relwidth=0.96, relheight=0.35)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
         self.controladorFun.cargarDatos(self.tabla, self.query)
 
@@ -115,21 +115,21 @@ class Libro:
         label_editorial = CTkLabel(self.main_frame, text="Editorial:")
 
         self.entry_titulo = CTkEntry(self.main_frame)
-        self.combo_autor = ttk.Combobox(self.main_frame, state="readonly", values=obtenerAutor())
+        self.combo_autor = CTkComboBox(self.main_frame, state="readonly", values=obtenerAutor())
         self.entry_stock = CTkEntry(self.main_frame)
-        self.combo_editorial = ttk.Combobox(self.main_frame, state="readonly", values=obtenerEditorial())
+        self.combo_editorial = CTkComboBox(self.main_frame, state="readonly", values=obtenerEditorial())
         
-        label_titulo.pack(pady=10, padx=10, fill=X)
-        self.entry_titulo.pack(pady=10, padx=10, fill=X)
+        label_titulo.pack(pady=10, padx=10)
+        self.entry_titulo.pack(pady=10, padx=10)
 
-        label_autor.pack(pady=10, padx=10, fill=X)
-        self.combo_autor.pack(pady=10, padx=10, fill=X)
+        label_autor.pack(pady=10, padx=10)
+        self.combo_autor.pack(pady=10, padx=10)
         
-        label_stock.pack(pady=10, padx=10, fill=X)
-        self.entry_stock.pack(pady=10, padx=10, fill=X)
+        label_stock.pack(pady=10, padx=10)
+        self.entry_stock.pack(pady=10, padx=10)
         
-        label_editorial.pack(pady=10, padx=10, fill=X)
-        self.combo_editorial.pack(pady=10, padx=10, fill=X)
+        label_editorial.pack(pady=10, padx=10)
+        self.combo_editorial.pack(pady=10, padx=10)
 
         self.btn_ingresar = CTkButton(
             self.main_frame,

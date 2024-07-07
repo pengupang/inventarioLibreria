@@ -8,18 +8,15 @@ class VentanaPrincipal (CTk):
     def __init__(self) -> None:
         super().__init__()
         self.title("Sistema Inventario")
-        ancho_pantalla = self.winfo_screenwidth()
-        alto_pantalla = self.winfo_screenheight()
-
-        ancho_ventana = 700
-        alto_ventana = 600
-        posicion_x = (ancho_pantalla - ancho_ventana) // 2 
-        posicion_y = (alto_pantalla - alto_ventana) // 2
-        self.geometry(f"{ancho_ventana}x{alto_ventana}+{posicion_x}+{posicion_y}")
+        
+        self.geometry("{0}x{1}+0+0".format(self.winfo_screenwidth(), self.winfo_screenheight()))
+        self.bind("<Escape>", self.exit_maximize)
+       
         self.config(background="#dbdbdb")
         self.main_frame = None
 
         self.protocol("WM_DELETE_WINDOW",self.cerrarVentana)
+        
 
     def cerrarVentana(self):
         cerrar= messagebox.askyesno(message="Está seguro que quiere cerrar la aplicación?", title= "Confirmar cierre")
@@ -27,3 +24,6 @@ class VentanaPrincipal (CTk):
         if cerrar:
             self.destroy()
     
+    def exit_maximize(self, event=None):
+        self.state('normal')
+
