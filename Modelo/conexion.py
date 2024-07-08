@@ -1,3 +1,4 @@
+from tkinter import W
 import mysql.connector
 from mysql.connector.fabric.connection import FabricMySQLSet
 
@@ -87,6 +88,8 @@ def comprobarDuplicidad(nomtabla, palabra):
         columna = 'Titulo'
     elif nomtabla == 'autor' or nomtabla == 'editorial' or nomtabla == 'proveedor':
         columna = 'Nombre'
+    elif nomtabla == 'movimiento':
+        return False
     query = "SELECT {} FROM {} WHERE LOWER({}) = LOWER(\"{}\")".format(columna,nomtabla,columna,palabra)
     resultado = ejecutar_consulta(query)
     if resultado:

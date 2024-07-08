@@ -154,15 +154,14 @@ class Movimiento:
             text="Ingresar",
             command=lambda: self.controladorFun.insertar_datos(
                 "movimiento",
-                ["ID_Tipo_movimiento", "Fecha", "Total_neto"],
+                ["ID_Libro", "ID_Proveedor", "ID_Tipo_movimiento","Fecha","Cantidad","Total_neto"],
                 [self.controladorFun.obtenerID("libro",self.combo_titulo.get()),
                 self.controladorFun.obtenerID("proveedor",self.combo_proveedor.get()),
                 self.controladorFun.obtenerID("tipo_movimiento",self.combo_tipo.get()),
                 self.entry_fecha.get(), 
                 self.entry_cantidad.get(), 
                 self.entry_total.get()]
-            )
-        )
+            ))
 
         self.btn_ingresar.place(x=100, y=460)
 
@@ -205,7 +204,7 @@ class Movimiento:
                     """
         
         self.controladorFun.cargarDatos(tabla, query)
-    
+
     def seleccionar_datos(self, event):
         try:
             item = self.tabla.focus()
