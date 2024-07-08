@@ -46,21 +46,14 @@ class Autores:
         self.entry_id = CTkEntry(self.main_frame,state=DISABLED)
         self.entry_autor = CTkEntry(self.main_frame)
         
-        label_id.grid(row=0, column=0, padx=10, pady=10, sticky="e")
-        self.entry_id.grid(row=0, column=1, padx=10, pady=10)
+        label_id.place(relx=0.3, y=50)
+        self.entry_id.place(relx=0.4, y=50)
         
-        label_autor.grid(row=1, column=0, padx=10, pady=10, sticky="e")
-        self.entry_autor.grid(row=1, column=1, padx=10, pady=10)
+        label_autor.place(relx=0.3, y=110)
+        self.entry_autor.place(relx=0.4, y=110)
         
-        self.btn_editar = CTkButton(self.main_frame, text="Editar", state=DISABLED,
-        command=lambda: self.controladorFun.editar_datos(
-            "autor",
-            ["Nombre"],
-            [self.entry_id.get(),
-            self.entry_autor.get()]
-        ))
-
-        self.btn_editar.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        self.btn_editar = CTkButton(self.main_frame, text="Editar", command=None)
+        self.btn_editar.place(relx=0.4, y=200)
         
         query = "SELECT * FROM autor"
         self.tabla = ttk.Treeview(self.main_frame)
@@ -68,7 +61,7 @@ class Autores:
         self.tabla.column("#0", width=0)
         self.tabla.heading("ID", text="ID")
         self.tabla.heading("Autor", text="Nombre")
-        self.tabla.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+        self.tabla.place(relx=0.02, rely=0.5, relwidth=0.96, relheight=0.35)        
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
         self.controladorFun.cargarDatos(self.tabla, query)
 
@@ -78,8 +71,8 @@ class Autores:
         label_nombre = CTkLabel(self.main_frame, text="Nombre:")
         self.entry_nombre = CTkEntry(self.main_frame)
         
-        label_nombre.grid(row=0, column=0, padx=10, pady=10, sticky="e")
-        self.entry_nombre.grid(row=0, column=1, padx=10, pady=10)
+        label_nombre.pack(pady=10, padx=10)
+        self.entry_nombre.pack(pady=10, padx=10)
         
         self.btn_ingresar = CTkButton(
             self.main_frame,
@@ -90,27 +83,27 @@ class Autores:
                 [self.entry_nombre.get()]
             )
         )
-        self.btn_ingresar.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+        self.btn_ingresar.pack(pady=10, padx=10)
 
     def VerAutores(self):
         self.limpiar_main_frame()
 
         buscador = CTkEntry(self.main_frame)
-        buscador.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
+        buscador.pack(padx=10, pady=5, side=TOP, fill=X)
         
         boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(self.tabla, buscador, query))
-        boton_bus.grid(row=0, column=1, padx=10, pady=10, sticky="ew")
+        boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
         
         tabla = ttk.Treeview(self.main_frame)
         tabla['columns'] = ("1", "2")
         tabla.column("#0", width=0, stretch=False)
         tabla.heading("1", text="ID")
         tabla.heading("2", text="Nombre")
-        tabla.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+        tabla.pack(padx=10, pady=10, expand=True, fill=BOTH)
 
         botonEliminar = CTkButton(self.main_frame, text="Eliminar",
                                 command=lambda: self.controladorFun.eliminar_elemento(tabla,"autor"))
-        botonEliminar.grid(row=2,column=0,padx=10,pady=10)
+        botonEliminar.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
 
         query = "SELECT * FROM autor;"
         self.controladorFun.cargarDatos(tabla, query)

@@ -46,11 +46,11 @@ class Editoriales:
         self.entry_id = CTkEntry(self.main_frame, state=DISABLED)
         self.entry_editorial = CTkEntry(self.main_frame)
         
-        label_id.grid(row=0, column=0, padx=10, pady=10, sticky="e")
-        self.entry_id.grid(row=0, column=1, padx=10, pady=10)
+        label_id.place(relx=0.3, y=50)
+        self.entry_id.place(relx=0.4, y=50)
         
-        label_editorial.grid(row=1, column=0, padx=10, pady=10, sticky="e")
-        self.entry_editorial.grid(row=1, column=1, padx=10, pady=10)
+        label_editorial.place(relx=0.3, y=80)
+        self.entry_editorial.place(relx=0.4, y=80)
         
         self.btn_editar = CTkButton(self.main_frame, text="Editar", state=DISABLED,
         command=lambda: self.controladorFun.editar_datos(
@@ -60,7 +60,7 @@ class Editoriales:
             self.entry_editorial.get()]
         ))
 
-        self.btn_editar.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        self.btn_editar.place(relx=0.4, y=110)
         
         query = "SELECT * FROM editorial"
         self.tabla = ttk.Treeview(self.main_frame)
@@ -68,7 +68,7 @@ class Editoriales:
         self.tabla.column("#0", width=0)
         self.tabla.heading("ID", text="ID")
         self.tabla.heading("Autor", text="Nombre")
-        self.tabla.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+        self.tabla.place(relx=0.02, rely=0.5, relwidth=0.96, relheight=0.35)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
         self.controladorFun.cargarDatos(self.tabla, query)
 
@@ -78,8 +78,8 @@ class Editoriales:
         label_nombre = CTkLabel(self.main_frame, text="Nombre:")
         self.entry_nombre = CTkEntry(self.main_frame)
         
-        label_nombre.grid(row=0, column=0, padx=10, pady=10, sticky="e")
-        self.entry_nombre.grid(row=0, column=1, padx=10, pady=10)
+        label_nombre.place(relx=0.3, y=50)
+        self.entry_nombre.place(relx=0.4, y=50)
         
         self.btn_ingresar = CTkButton(
             self.main_frame,
@@ -90,27 +90,27 @@ class Editoriales:
                 [self.entry_nombre.get()]
             )
         )
-        self.btn_ingresar.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+        self.btn_ingresar.place(relx=0.4, y=80)
 
     def VerEditoriales(self):
         self.limpiar_main_frame()
 
         buscador = CTkEntry(self.main_frame)
-        buscador.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
+        buscador.pack(padx=10, pady=5, side=TOP, fill=X)
         
         boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(self.tabla, buscador, query))
-        boton_bus.grid(row=0, column=1, padx=10, pady=10, sticky="ew")
+        boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
         
         tabla = ttk.Treeview(self.main_frame)
         tabla['columns'] = ("1", "2")
         tabla.column("#0", width=0, stretch=False)
         tabla.heading("1", text="ID")
         tabla.heading("2", text="Nombre")
-        tabla.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+        tabla.pack(padx=10, pady=10, expand=True, fill=BOTH)
 
         botonEliminar = CTkButton(self.main_frame, text="Eliminar",
                                 command=lambda: self.controladorFun.eliminar_elemento(tabla,"editorial"))
-        botonEliminar.grid(row=2,column=0,padx=10,pady=10)
+        botonEliminar.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
 
         query = "SELECT * FROM editorial;"
         self.controladorFun.cargarDatos(tabla, query)

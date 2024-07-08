@@ -103,7 +103,7 @@ class Libro:
         self.tabla.heading("Autor", text="Autor")
         self.tabla.heading("Stock", text="Stock")
         self.tabla.heading("Editorial", text="Editorial")
-        self.tabla.place(relx=0.02, rely=0.5, relwidth=0.96, relheight=0.35)
+        self.tabla.place(relx=0.02, rely=0.5, relwidth=0.96, relheight=0.35)        
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
         self.controladorFun.cargarDatos(self.tabla, self.query)
 
@@ -168,6 +168,7 @@ class Libro:
         tabla = ttk.Treeview(self.main_frame)
         # Se realiza un query especifico para la tabla de productos
         # esta debe mostrar titulo,autor,stock del libro
+        boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(tabla, buscador, self.query))
 
         botonListar = CTkButton(self.main_frame, text="Imprimir", 
                                 command=lambda: self.controladorFun._generarPdf('libro'))
@@ -181,17 +182,20 @@ class Libro:
         # crea columnas
         tabla['columns'] = ("1", "2", "3", "4", "5")
         # cambia ancho de columna id
-        tabla.column("#0", width=-1, stretch=False)
-        tabla.column("#1", width=70, stretch=False)
-        tabla.column("#2", width=550, stretch=False)
-        tabla.column("#3", width=130, stretch=False)
-        tabla.column("#4", width=50, stretch=False)
+        tabla.column("#0", width=0, stretch=True)
+        tabla.column("#1", width=35, stretch=True)
+        tabla.column("#2", width=300, stretch=True)
+        tabla.column("#3", width=130, stretch=True)
+        tabla.column("#4", width=50, stretch=True)
         # agrega texto a los headings de las columnas
         tabla.heading("1", text="ID")
         tabla.heading("2", text="Titulo")
         tabla.heading("3", text="Autor")
         tabla.heading("4", text="Stock")
         tabla.heading("5", text="Editorial")
+
+        #todavia no imprime :(
+        botonListar = CTkButton(self.main_frame, text="Imprimir", command=lambda: self.controladorFun._generarPdf('libro'))
 
         buscador.pack(padx=10, pady=5, side=TOP, fill=X)
         boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
@@ -223,5 +227,3 @@ class Libro:
             titulo = 'Edición de datos'
             mensaje = 'No ha seleccionado ningún registro'
             messagebox.showerror(titulo, mensaje)
-
-            

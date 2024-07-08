@@ -170,10 +170,10 @@ class Movimiento:
         self.limpiar_main_frame()
 
         buscador = CTkEntry(self.main_frame)
-        buscador.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
-        
+        buscador.pack(padx=10, pady=5, side=TOP, fill=X)
+
         boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(self.tabla, buscador, query))
-        boton_bus.grid(row=0, column=1, padx=10, pady=10, sticky="ew")
+        boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
 
         tabla = ttk.Treeview(self.main_frame)
         tabla['columns'] = ("1", "2","3","4","5","6","7")
@@ -185,17 +185,17 @@ class Movimiento:
         tabla.heading("5", text="Fecha")
         tabla.heading("6", text="Cantidad")
         tabla.heading("7", text="Total Neto")
-        tabla.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+        tabla.pack(padx=10, pady=10, expand=True, fill=BOTH)
 
         botonLisCompra = CTkButton(self.main_frame, text="Imprimir Compras", command=lambda: self.controladorFun._generarPdf('compras'))
-        botonLisCompra.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+        botonLisCompra.pack(padx=10, pady=10, side=RIGHT, fill=BOTH)
 
         botonLisCompra = CTkButton(self.main_frame, text="Imprimir Ventas", command=lambda: self.controladorFun._generarPdf('ventas'))
-        botonLisCompra.grid(row=3, column=0, padx=10, pady=10, sticky="w")
+        botonLisCompra.pack(padx=10, pady=10, side=RIGHT, fill=BOTH)
 
         botonEliminar = CTkButton(self.main_frame, text="Eliminar",
                                 command=lambda: self.controladorFun.eliminar_elemento(tabla,"movimiento"))
-        botonEliminar.grid(row=2, column=1, padx=10, pady=10,sticky="W")
+        botonEliminar.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
 
         query = """SELECT movimiento.ID, libro.Titulo, proveedor.Nombre, tipo_movimiento.Tipo, Fecha, Cantidad, Total_neto 
                     FROM movimiento 
