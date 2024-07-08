@@ -1,5 +1,6 @@
 from customtkinter import *
 from PIL import Image
+from Modelo.rutas import ruta_recurso
 
 
 # En esta clase se carga Exclusivamente el frame de login 
@@ -13,7 +14,7 @@ class LoginView (CTkFrame):
         
     
     def mostrar_Login(self):
-        my_image = CTkImage(light_image=Image.open("Vista/img/acceso.png"),
+        my_image = CTkImage(light_image=Image.open(ruta_recurso("Vista/img/acceso.png")),
                                   size=(120,120))
         CTkLabel(self, image=my_image, text="").place(relx=0.5, rely=0.28, anchor=CENTER)
 

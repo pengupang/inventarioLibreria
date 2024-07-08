@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import Frame
 import customtkinter
 from PIL import Image
+from Modelo.rutas import ruta_recurso
 
 
 
@@ -12,7 +13,7 @@ class ToolBar(Frame):
         self.callback = callback
         self.menu_frame = Frame(master, background="gray")
         self.menu_frame.pack(side="top", fill="x")
-        my_image = customtkinter.CTkImage(light_image=Image.open("Vista/img/libro1.png"),
+        my_image = customtkinter.CTkImage(light_image=Image.open(ruta_recurso("Vista/img/libro1.png")),
                                   size=(60, 60 ))
         buttonIMG=customtkinter.CTkLabel(self.menu_frame, image=my_image,text="").pack(side = 'left',padx=10)
         self.crear_botones()
