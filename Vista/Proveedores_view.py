@@ -131,6 +131,3 @@ class Proveedores:
             titulo = 'Edición de datos'
             mensaje = 'No ha seleccionado ningún registro'
             messagebox.showerror(titulo, mensaje)
-
-
-    

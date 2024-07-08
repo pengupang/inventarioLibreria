@@ -171,6 +171,10 @@ class ControladorFunciones:
                 query = "SELECT ID, Nombre FROM autor WHERE Nombre=%s;"
             elif tabla == 'editorial':
                 query = "SELECT ID, Nombre FROM editorial WHERE Nombre=%s;"
+            elif tabla == 'proveedor':
+                query = "SELECT ID, Nombre FROM proveedor WHERE Nombre=%s;"
+            elif tabla == 'tipo_movimiento':
+                query = "SELECT ID, Tipo FROM tipo_movimiento WHERE Tipo=%s;"
             else:
                 return "ERROR"
             registro = conexion.ejecutar_consulta(query,[busca,])

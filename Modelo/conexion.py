@@ -44,6 +44,16 @@ def ejecutar_consulta(query, params=None):
         cursor.close()
         conn.close()
 
+def obtenerLibro():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Libro")
+    resultados = cursor.fetchall()
+    conn.close()
+
+
+    return [m[1] for m in resultados]
+
 def obtenerAutor():
     conn = conectar()
     cursor = conn.cursor()
@@ -57,6 +67,15 @@ def obtenerEditorial():
     conn = conectar()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM editorial")
+    resultados = cursor.fetchall()
+    conn.close()
+
+    return [n[1] for n in resultados]
+
+def obtenerProveedores():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM proveedor")
     resultados = cursor.fetchall()
     conn.close()
 
