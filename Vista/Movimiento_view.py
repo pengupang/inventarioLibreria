@@ -46,11 +46,11 @@ class Movimiento:
         self.entry_id = CTkEntry(self.main_frame, state=DISABLED)
         self.entry_Movimiento= CTkEntry(self.main_frame)
         
-        label_id.grid(row=0, column=0, padx=10, pady=10, sticky="e")
-        self.entry_id.grid(row=0, column=1, padx=10, pady=10)
+        label_id.place(relx=0.3, y=50)
+        self.entry_id.place(relx=0.4, y=50)
         
-        label_Movimiento.grid(row=1, column=0, padx=10, pady=10, sticky="e")
-        self.entry_Movimiento.grid(row=1, column=1, padx=10, pady=10)
+        label_Movimiento.place(relx=0.3, y=80)
+        self.entry_Movimiento.place(relx=0.4, y=80)
         
         self.btn_editar = CTkButton(self.main_frame, text="Editar", 
         command=lambda: self.controladorFun.editar_datos(
@@ -60,7 +60,8 @@ class Movimiento:
             self.entry_Movimiento.get()]
         ))
 
-        self.btn_editar.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
+        self.btn_editar.place(relx=0.4, y=110)
+        
         
         query = "SELECT * FROM autor"
         self.tabla = ttk.Treeview(self.main_frame)
@@ -68,7 +69,7 @@ class Movimiento:
         self.tabla.column("#0", width=0)
         self.tabla.heading("ID", text="ID")
         self.tabla.heading("Editorial", text="Nombre")
-        self.tabla.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
+        self.tabla.place(relx=0.02, rely=0.5, relwidth=0.96, relheight=0.35)
         self.tabla.bind("<ButtonRelease-1>", self.seleccionar_datos)
         self.controladorFun.cargarDatos(self.tabla, query)
 
@@ -82,14 +83,14 @@ class Movimiento:
         self.entry_fecha = CTkEntry(self.main_frame)
         self.entry_total = CTkEntry(self.main_frame)
         
-        label_idtype.place(x=50, y=80)
-        self.entry_idtype.place(x=150, y=80)
+        label_idtype.pack(padx=10, pady=10)
+        self.entry_idtype.pack(padx=10, pady=10)
 
-        label_fecha.place(x=50, y=110)
-        self.entry_fecha.place(x=150, y=110)
+        label_fecha.pack(padx=10, pady=10)
+        self.entry_fecha.pack(padx=10, pady=10)
 
-        label_total.place(x=50, y=170)
-        self.entry_total.place(x=150, y=170)
+        label_total.pack(padx=10, pady=10)
+        self.entry_total.pack(padx=10, pady=10)
 
         self.btn_ingresar = CTkButton(
             self.main_frame,
@@ -102,16 +103,16 @@ class Movimiento:
         )
         
 
-        self.btn_ingresar.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+        self.btn_ingresar.pack(padx=10, pady=10)
 
     def VerMovimientos(self):
         self.limpiar_main_frame()
 
         buscador = CTkEntry(self.main_frame)
-        buscador.grid(row=0, column=0, padx=10, pady=10, sticky="ew")
-        
+        buscador.pack(padx=10, pady=5, side=TOP, fill=X)
+
         boton_bus = CTkButton(self.main_frame, text="Buscar", command=lambda: self.controladorFun._buscarElemento(self.tabla, buscador, query))
-        boton_bus.grid(row=0, column=1, padx=10, pady=10, sticky="ew")
+        boton_bus.pack(padx=10, pady=5, side=TOP, fill=X)
 
         tabla = ttk.Treeview(self.main_frame)
         tabla['columns'] = ("1", "2","3","4","5","6","7")
@@ -123,17 +124,17 @@ class Movimiento:
         tabla.heading("5", text="Fecha")
         tabla.heading("6", text="Cantidad")
         tabla.heading("7", text="Total Neto")
-        tabla.grid(row=1, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
+        tabla.pack(padx=10, pady=10, expand=True, fill=BOTH)
 
         botonLisCompra = CTkButton(self.main_frame, text="Imprimir Compras", command=lambda: self.controladorFun._generarPdf('compras'))
-        botonLisCompra.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+        botonLisCompra.pack(padx=10, pady=10, side=RIGHT, fill=BOTH)
 
         botonLisCompra = CTkButton(self.main_frame, text="Imprimir Ventas", command=lambda: self.controladorFun._generarPdf('ventas'))
-        botonLisCompra.grid(row=3, column=0, padx=10, pady=10, sticky="w")
+        botonLisCompra.pack(padx=10, pady=10, side=RIGHT, fill=BOTH)
 
         botonEliminar = CTkButton(self.main_frame, text="Eliminar",
                                 command=lambda: self.controladorFun.eliminar_elemento(tabla,"movimiento"))
-        botonEliminar.grid(row=2, column=1, padx=10, pady=10,sticky="W")
+        botonEliminar.pack(padx=10, pady=10, side=LEFT, fill=BOTH)
 
         query = """SELECT movimiento.ID, libro.Titulo, proveedor.Nombre, tipo_movimiento.Tipo, Fecha, Cantidad, Total_neto 
                     FROM movimiento 
