@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2024 a las 05:12:00
+-- Tiempo de generación: 08-07-2024 a las 03:11:06
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -81,7 +81,8 @@ INSERT INTO `libro` (`ID`, `Titulo`, `Stock`, `ID_Autor`, `ID_Editorial`) VALUES
 (1, 'El señor de los anillos: La comunidad del anillo', 1, 1, 1),
 (2, 'El señor de los anillos: Las dos torres', 1, 1, 1),
 (3, 'El señor de los anillos: El retorno del rey', 1, 1, 1),
-(4, 'En busca de Wondla', 2, 2, 2);
+(4, 'En busca de Wondla', 2, 2, 2),
+(5, 'El Hobbit', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -104,8 +105,8 @@ CREATE TABLE `movimiento` (
 --
 
 INSERT INTO `movimiento` (`ID`, `ID_Libro`, `ID_Proveedor`, `ID_Tipo_movimiento`, `Fecha`, `Cantidad`, `Total_neto`) VALUES
-(1, 1, NULL, 1, '2024-04-17', 1, 7000),
-(2, 2, NULL, 2, '2024-04-17', 1, 7000);
+(1, 1, 1, 1, '2024-04-17', 1, 7000),
+(2, 3, 2, 2, '2024-04-23', 4, 28000);
 
 -- --------------------------------------------------------
 
@@ -123,9 +124,10 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`ID`, `Nombre`) VALUES
-(1, 'Azeta'),
-(2, 'Elkar'),
-(3, 'Arnoia');
+(1, '--NO-PROVEEDOR--'),
+(2, 'Azeta'),
+(3, 'Elkar'),
+(4, 'Arnoia');
 
 -- --------------------------------------------------------
 
@@ -234,7 +236,7 @@ ALTER TABLE `editorial`
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `movimiento`
@@ -246,7 +248,7 @@ ALTER TABLE `movimiento`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_movimiento`
